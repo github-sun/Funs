@@ -13,7 +13,7 @@
 	<modules>
         <module>../funs-model</module>
         <module>../funs-dao</module>
-        <module>../funs-auth</module>
+        <module>../funs-admin</module>
         <module>../funs-web</module>
     </modules>
 
