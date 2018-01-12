@@ -6,7 +6,7 @@
 	<artifactId>funs-admin</artifactId>
 	<packaging>jar</packaging>
 
-	<name>funs-auth</name>
+	<name>funs-admin</name>
 
 	<parent>
 		<groupId>org.sun</groupId>
