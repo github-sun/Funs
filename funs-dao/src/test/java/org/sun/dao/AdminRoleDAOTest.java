@@ -1,6 +1,7 @@
 package org.sun.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -34,9 +35,36 @@ public class AdminRoleDAOTest {
 	private AdminRoleDAO adminRoleDAO;
 	
 	@Test
+	public void queryById() {
+		Admin admin = new Admin();
+		admin.setUsername("admin");
+		admin.setPassword("111111");
+		admin.setCreateDate(new Date());
+		admin.setUpdateDate(new Date());
+		Assert.assertEquals(true, adminDAO.insert(admin) > 0);
+		
+		Role role = new Role();
+		role.setRolename("system");
+		role.setCreateDate(new Date());
+		role.setUpdateDate(new Date());
+		Assert.assertEquals(true, roleDAO.insert(role) > 0);
+		
+		AdminRole adminRole = new AdminRole();
+		adminRole.setAdminId(admin.getId());
+		adminRole.setRoleId(role.getId());
+		Assert.assertEquals(1, adminRoleDAO.insert(adminRole));
+		
+		System.out.println("queryById adminRole "+adminRole.toString());
+		AdminRole a = adminRoleDAO.queryById(adminRole.getAdminId(), adminRole.getRoleId());
+		System.out.println("queryById a "+a);
+	}
+	
+	@Test
 	public void queryAll() {
 		insert();
+		List<AdminRole> list = adminRoleDAO.queryAll();
 		Assert.assertNotNull(adminRoleDAO.queryAll());
+		System.out.println("queryAll list "+list);
 	}
 
 	@Test
@@ -46,13 +74,13 @@ public class AdminRoleDAOTest {
 		admin.setPassword("111111");
 		admin.setCreateDate(new Date());
 		admin.setUpdateDate(new Date());
-		Assert.assertEquals(1, adminDAO.insert(admin));
+		Assert.assertEquals(true, adminDAO.insert(admin) > 0);
 		
 		Role role = new Role();
 		role.setRolename("system");
 		role.setCreateDate(new Date());
 		role.setUpdateDate(new Date());
-		Assert.assertEquals(1, roleDAO.insert(role));
+		Assert.assertEquals(true, roleDAO.insert(role) > 0);
 		
 		AdminRole adminRole = new AdminRole();
 		adminRole.setAdminId(admin.getId());
@@ -67,13 +95,13 @@ public class AdminRoleDAOTest {
 		admin.setPassword("111111");
 		admin.setCreateDate(new Date());
 		admin.setUpdateDate(new Date());
-		Assert.assertEquals(1, adminDAO.insert(admin));
+		Assert.assertEquals(true, adminDAO.insert(admin) > 0);
 		
 		Role role = new Role();
 		role.setRolename("system");
 		role.setCreateDate(new Date());
 		role.setUpdateDate(new Date());
-		Assert.assertEquals(1, roleDAO.insert(role));
+		Assert.assertEquals(true, roleDAO.insert(role) > 0);
 		
 		AdminRole adminRole = new AdminRole();
 		adminRole.setAdminId(admin.getId());
@@ -89,18 +117,18 @@ public class AdminRoleDAOTest {
 		admin.setPassword("111111");
 		admin.setCreateDate(new Date());
 		admin.setUpdateDate(new Date());
-		Assert.assertEquals(1, adminDAO.insert(admin));
+		Assert.assertEquals(true, adminDAO.insert(admin) > 0);
 		
 		Role role = new Role();
 		role.setRolename("system");
 		role.setCreateDate(new Date());
 		role.setUpdateDate(new Date());
-		Assert.assertEquals(1, roleDAO.insert(role));
+		Assert.assertEquals(true, roleDAO.insert(role) > 0);
 		
 		AdminRole adminRole = new AdminRole();
 		adminRole.setAdminId(admin.getId());
 		adminRole.setRoleId(role.getId());
-		Assert.assertEquals(1, adminRoleDAO.insert(adminRole));
+		Assert.assertEquals(true, adminRoleDAO.insert(adminRole) > 0);
 		
 		role = new Role();
 		role.setRolename("admin");

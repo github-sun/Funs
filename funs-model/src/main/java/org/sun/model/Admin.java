@@ -63,4 +63,10 @@ public class Admin {
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
+
+	@Override
+	public String toString() {
+		return "Admin [id=" + id + ", username=" + username + ", password=" + password + ", createDate=" + createDate
+				+ ", updateDate=" + updateDate + "]";
+	}
 }

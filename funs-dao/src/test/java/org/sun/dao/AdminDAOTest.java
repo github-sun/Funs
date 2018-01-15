@@ -26,6 +26,17 @@ public class AdminDAOTest {
 	private AdminDAO adminDAO;
 	
 	@Test
+	public void queryById() {
+		Admin model = new Admin();
+		model.setUsername("admin");
+		model.setPassword("111111");
+		model.setCreateDate(new Date());
+		model.setUpdateDate(new Date());
+		Assert.assertEquals(true, adminDAO.insert(model) > 0);
+		Assert.assertNotNull(adminDAO.queryById(model.getId()));
+	}
+	
+	@Test
 	public void queryAll() {
 		insert();
 		Assert.assertNotNull(adminDAO.queryAll());
@@ -38,7 +49,7 @@ public class AdminDAOTest {
 		model.setPassword("111111");
 		model.setCreateDate(new Date());
 		model.setUpdateDate(new Date());
-		Assert.assertEquals(1, adminDAO.insert(model));
+		Assert.assertEquals(true, adminDAO.insert(model) > 0);
 	}
 	
 	@Test
@@ -48,7 +59,7 @@ public class AdminDAOTest {
 		model.setPassword("111111");
 		model.setCreateDate(new Date());
 		model.setUpdateDate(new Date());
-		Assert.assertEquals(1, adminDAO.insert(model));
+		Assert.assertEquals(true, adminDAO.insert(model) > 0);
 		Assert.assertEquals(1, adminDAO.deleteById(model.getId()));
 	}
 	
@@ -59,7 +70,7 @@ public class AdminDAOTest {
 		model.setPassword("111111");
 		model.setCreateDate(new Date());
 		model.setUpdateDate(new Date());
-		Assert.assertEquals(1, adminDAO.insert(model));
+		Assert.assertEquals(true, adminDAO.insert(model) > 0);
 		
 		model.setPassword("22222");
 		

@@ -28,4 +28,8 @@ public class AdminRole {
 		this.roleId = roleId;
 	}
 
+	@Override
+	public String toString() {
+		return "AdminRole [adminId=" + adminId + ", roleId=" + roleId + "]";
+	}
 }

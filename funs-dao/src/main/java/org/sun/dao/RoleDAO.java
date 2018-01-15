@@ -21,6 +21,9 @@ import org.sun.model.Role;
 @Mapper
 public interface RoleDAO {
 	
+	@Select("SELECT * FROM ROLE WHERE ID = #{id}")
+	Role queryById(@Param("id") int id);
+	
 	@Select("SELECT * FROM ROLE ORDER BY UPDATE_DATE DESC")
 	List<Role> queryAll();
 	

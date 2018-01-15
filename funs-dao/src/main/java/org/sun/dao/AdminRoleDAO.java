@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -20,6 +19,9 @@ import org.sun.model.AdminRole;
 
 @Mapper
 public interface AdminRoleDAO {
+	
+	@Select("SELECT * FROM ADMIN_ROLE WHERE ADMIN_ID = #{admin_id} and ROLE_ID = #{role_id}")
+	AdminRole queryById(@Param("admin_id") int admin_id, @Param("role_id") int role_id);
 	
 	@Select("SELECT * FROM ADMIN_ROLE")
 	List<AdminRole> queryAll();

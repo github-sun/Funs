@@ -8,7 +8,6 @@ import java.util.Date;
 * 角色表
 */
 public class Role {
-
 	//主键id
 	private int id;
 	
@@ -51,5 +50,11 @@ public class Role {
 
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
+	}
+	
+	@Override
+	public String toString() {
+		return "Role [id=" + id + ", rolename=" + rolename + ", createDate=" + createDate + ", updateDate=" + updateDate
+				+ "]";
 	}
 }

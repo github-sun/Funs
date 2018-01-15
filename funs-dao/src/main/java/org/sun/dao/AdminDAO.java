@@ -21,6 +21,9 @@ import org.sun.model.Admin;
 @Mapper
 public interface AdminDAO {
 	
+	@Select("SELECT * FROM ADMIN WHERE ID = #{id}")
+	Admin queryById(@Param("id") int id);
+	
 	@Select("SELECT * FROM ADMIN ORDER BY UPDATE_DATE DESC")
 	List<Admin> queryAll();
 	
