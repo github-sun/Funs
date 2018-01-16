@@ -21,10 +21,10 @@ import org.sun.model.Role;
 @Mapper
 public interface RoleDAO {
 	
-	@Select("SELECT * FROM ROLE WHERE ID = #{id}")
+	@Select("SELECT ID as id,ROLE_NAME as rolename, CREATE_DATE as createDate, UPDATE_DATE as updateDate FROM ROLE WHERE ID = #{id}")
 	Role queryById(@Param("id") int id);
 	
-	@Select("SELECT * FROM ROLE ORDER BY UPDATE_DATE DESC")
+	@Select("SELECT ID as id,ROLE_NAME as rolename, CREATE_DATE as createDate, UPDATE_DATE as updateDate FROM ROLE ORDER BY UPDATE_DATE DESC")
 	List<Role> queryAll();
 	
 	@Insert("INSERT INTO ROLE(ID,ROLE_NAME,CREATE_DATE,UPDATE_DATE) VALUES(#{id}, #{rolename},#{createDate},#{updateDate})")
@@ -36,7 +36,7 @@ public interface RoleDAO {
 	@Transactional
 	int deleteById(@Param("id") int id);
 	
-	@Update("UPDATE ROLE SET ROLE_NAME=#{rolename},CREATE_DATE=#{createDate},UPDATE_DATE=#{updateDate} WHERE ID=#{id}")
+	@Update("UPDATE ROLE SET ROLE_NAME=#{rolename},UPDATE_DATE=#{updateDate} WHERE ID=#{id}")
 	@Transactional
 	int update(Role model);
 }

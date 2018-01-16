@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.transaction.annotation.Transactional;
 import org.sun.model.AdminRole;
+import org.sun.model.bo.AdminRoleBO;
 
 /**
 * @author sun 
@@ -20,10 +21,10 @@ import org.sun.model.AdminRole;
 @Mapper
 public interface AdminRoleDAO {
 	
-	@Select("SELECT * FROM ADMIN_ROLE WHERE ADMIN_ID = #{admin_id} and ROLE_ID = #{role_id}")
-	AdminRole queryById(@Param("admin_id") int admin_id, @Param("role_id") int role_id);
+	@Select("SELECT ADMIN_ID as adminID, ROLE_ID as roleId  FROM ADMIN_ROLE WHERE ADMIN_ID = #{adminId} and ROLE_ID = #{roleId}")
+	AdminRole queryById(@Param("adminId") int admin_id, @Param("roleId") int role_id);
 	
-	@Select("SELECT * FROM ADMIN_ROLE")
+	@Select("SELECT ADMIN_ID as adminID, ROLE_ID as roleId  FROM ADMIN_ROLE")
 	List<AdminRole> queryAll();
 	
 	@Insert("INSERT INTO ADMIN_ROLE(ADMIN_ID,ROLE_ID) VALUES(#{adminId}, #{roleId})")
@@ -37,4 +38,7 @@ public interface AdminRoleDAO {
 	@Update("UPDATE ADMIN_ROLE SET ADMIN_ID=#{adminId},ROLE_ID=#{roleId}")
 	@Transactional
 	int update(AdminRole model);
+	
+	@Select("SELECT a.ADMIN_ID as adminId, a.ROLE_ID as roleId, b.USER_NAME as username, c.ROLE_NAME as rolename FROM ADMIN_ROLE a, ADMIN b, ROLE c WHERE a.ADMIN_ID=b.ID and a.ROLE_ID=c.ID")
+	List<AdminRoleBO> query();
 }

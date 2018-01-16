@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>用户</title>
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <style>
+          /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+          .row.content {height: 800px}
+
+          /* Set gray background color and 100% height */
+          .sidenav {
+            background-color: #f1f1f1;
+            height: 100%;
+          }
+
+          /* Set black background color, white text and some padding */
+          footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+          }
+
+          /* On small screens, set height to 'auto' for sidenav and grid */
+          @media screen and (max-width: 767px) {
+            .sidenav {
+              height: auto;
+              padding: 15px;
+            }
+            .row.content {height: auto;} 
+          }
+        </style>
+
+    </head>
+    <body>
+
+        <div class="container-fluid">
+
+            <div class="row content">
+                
+
+                    <h2>修改用户</h2>
+                    <hr>
+                    <div class="dataContainer" ng-view>
+                    <input id="item_id" type="hidden"  name="name" value="" maxlength="20"　/>
+                        <table id="tblUser" class="table table-hover" cellpadding="0" cellspacing="0">
+                               <tr>
+				    <td width="20%">用户名</td>
+				    <td width="80%"><input id="item_username"  name="username" value="" maxlength="20"　/></td>
+				</tr>
+				<tr>
+				    <td>密码</td>
+				    <td><input id="item_password" name="password" value=""  maxlength="50"/></td>
+				</tr>
+                        </table>
+　　　　　　　　　　　<div align="center">
+                            <button id="updateAdminSubmit" class="btn">提交</button> <button id="back" class="btn">返回</button>
+                        </div>
+　　　　　                   
+                </div>
+
+            </div>
+        </div>
+
+        <script type='text/javascript' src='../lib/jquery/jquery-1.11.1.min.js'></script>
+        <script type='text/javascript' src="../lib/bootstrap/bootstrap.min.js"></script>
+
+        <script src="../js/admin.js"></script>
+        <script type="text/javascript">
+
+            $(document).ready(function(){
+	  var thisURL = document.URL;    
+	  var  getval =thisURL.split('?')[1];  
+	  var showval= getval.split("=")[1]; 
+	  getAdminById(showval);
+                $("#updateAdminSubmit").bind("click", function(){
+                	updateAdminSubmit();
+                });
+                $("#back").bind("click", function(){
+　　　　　　　　　　　　　　　　　　　　$(window).attr('location','./admin.html');
+                });
+            });
+
+		function onlyNum() {
+		    if(!(event.keyCode==46)&&!(event.keyCode==8)&&!(event.keyCode==37)&&!(event.keyCode==39))
+		    if(!((event.keyCode>=48&&event.keyCode<=57)||(event.keyCode>=96&&event.keyCode<=105)))
+		    event.returnValue=false;
+		}
+        </script>
+
+    </body>
+</html>

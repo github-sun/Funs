@@ -11,6 +11,7 @@ import org.sun.dao.RoleDAO;
 import org.sun.model.Admin;
 import org.sun.model.AdminRole;
 import org.sun.model.Role;
+import org.sun.model.bo.AdminRoleBO;
 
 /**
 * @author sun 
@@ -86,12 +87,12 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public List<AdminRole> getAdminRoleDatas() {
-		return adminRoleDAO.queryAll();
+	public List<AdminRoleBO> getAdminRoleDatas() {
+		return  adminRoleDAO.query();
 	}
 
 	@Override
-	public int addRole(AdminRole model) {
+	public int addAdminRole(AdminRole model) {
 		return adminRoleDAO.insert(model);
 	}
 

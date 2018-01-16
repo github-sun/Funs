@@ -1,14 +1,22 @@
 package org.sun.model;
 
+import java.io.Serializable;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
 * @author sun 
 * @date Jan 12, 2018 5:20:08 PM
 * 用户表
 */
-public class Admin {
+public class Admin implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6885295259916111599L;
+
 	//主键
 	private int id;
 	
@@ -19,9 +27,11 @@ public class Admin {
 	private String password;
 	
 	//创建日期
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createDate;
 	
 	//修改日期
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date updateDate;
 
 	public int getId() {

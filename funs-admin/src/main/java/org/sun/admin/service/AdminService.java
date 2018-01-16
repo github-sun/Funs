@@ -5,6 +5,7 @@ import java.util.List;
 import org.sun.model.Admin;
 import org.sun.model.AdminRole;
 import org.sun.model.Role;
+import org.sun.model.bo.AdminRoleBO;
 
 /**
  * @author sun
@@ -35,9 +36,9 @@ public interface AdminService {
 
 	AdminRole getAdminRoleById(int adminId, int roleId);
 
-	List<AdminRole> getAdminRoleDatas();
+	List<AdminRoleBO> getAdminRoleDatas();
 
-	int addRole(AdminRole model);
+	int addAdminRole(AdminRole model);
 
 	int removeAdminRoleById(int adminId, int roleId);
 
