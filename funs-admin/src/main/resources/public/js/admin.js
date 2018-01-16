@@ -4,7 +4,7 @@
 		   url: 'http://localhost:8080/admin',
 		   success: function(data) {
 			jQuery.each(data, function(i, val) {
-			      var strHTML = "<tr><td>" + val.id + "</td><td>" + val.username + "</td><td>"+val.password+"</td><td>"+val.createDate+"</td><td>"+val.updateDate+"</td><td><a onclick='updateAdmin("+val.id+")' href='#'>修改</a>　|　<a onclick='deleteAdminSubmit("+val.id+")' href='#'>删除</a></td></tr>";
+			      var strHTML = "<tr><td>" + val.id + "</td><td>" + val.username + "</td><td>"+val.password+"</td><td>"+val.state+"</td><td>"+val.salt+"</td><td>"+val.createDate+"</td><td>"+val.updateDate+"</td><td><a onclick='updateAdmin("+val.id+")' href='#'>修改</a>　|　<a onclick='deleteAdminSubmit("+val.id+")' href='#'>删除</a></td></tr>";
                         $('table#tblUser tbody').append(strHTML);
 			});  
 		   },

@@ -14,6 +14,8 @@ import org.sun.model.bo.AdminRoleBO;
  */
 public interface AdminService {
 
+	Admin getAdminByUsername(String username);
+	
 	Admin getAdminById(int id);
 
 	List<Admin> getAdminDatas();

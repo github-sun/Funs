@@ -26,6 +26,12 @@ public class Admin implements Serializable{
 	//密码
 	private String password;
 	
+	//锁定状态
+	private int state;
+	
+	//加盐
+	private String salt;
+	
 	//创建日期
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createDate;
@@ -58,6 +64,22 @@ public class Admin implements Serializable{
 		this.password = password;
 	}
 
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -76,7 +98,7 @@ public class Admin implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Admin [id=" + id + ", username=" + username + ", password=" + password + ", createDate=" + createDate
-				+ ", updateDate=" + updateDate + "]";
+		return "Admin [id=" + id + ", username=" + username + ", password=" + password + ", state=" + state + ", salt="
+				+ salt + ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
 	}
 }

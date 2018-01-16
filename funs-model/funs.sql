@@ -5,6 +5,8 @@ CREATE TABLE `ADMIN` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `USER_NAME` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `PASSWORD` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `STATE` tinyint(1) NOT NULL DEFAULT '1',
+  `SALT` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `CREATE_DATE` datetime NOT NULL,
   `UPDATE_DATE` datetime NOT NULL,
   PRIMARY KEY (`ID`),

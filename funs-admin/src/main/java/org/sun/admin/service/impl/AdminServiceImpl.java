@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.sun.admin.service.AdminService;
+import org.sun.admin.util.Utils;
 import org.sun.dao.AdminDAO;
 import org.sun.dao.AdminRoleDAO;
 import org.sun.dao.RoleDAO;
@@ -32,6 +33,11 @@ public class AdminServiceImpl implements AdminService{
 	private AdminRoleDAO adminRoleDAO;
 
 	@Override
+	public Admin getAdminByUsername(String username) {
+		return adminDAO.queryByUsername(username);
+	}
+	
+	@Override
 	public Admin getAdminById(int id) {
 		return adminDAO.queryById(id);
 	}
@@ -43,6 +49,7 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public int addAdmin(Admin model) {
+		Utils.encryptPassword(model);
 		return adminDAO.insert(model);
 	}
 

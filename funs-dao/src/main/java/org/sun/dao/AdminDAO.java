@@ -21,13 +21,16 @@ import org.sun.model.Admin;
 @Mapper
 public interface AdminDAO {
 	
-	@Select("SELECT ID as id,USER_NAME as username, PASSWORD as password, CREATE_DATE as createDate, UPDATE_DATE as updateDate FROM ADMIN WHERE ID = #{id}")
+	@Select("SELECT ID as id,USER_NAME as username, PASSWORD as password, STATE as state, SALT as salt, CREATE_DATE as createDate, UPDATE_DATE as updateDate FROM ADMIN WHERE USER_NAME = #{username}")
+	Admin queryByUsername(@Param("username") String username);
+	
+	@Select("SELECT ID as id,USER_NAME as username, PASSWORD as password, STATE as state, SALT as salt, CREATE_DATE as createDate, UPDATE_DATE as updateDate FROM ADMIN WHERE ID = #{id}")
 	Admin queryById(@Param("id") int id);
 	
-	@Select("SELECT ID as id,USER_NAME as username, PASSWORD as password, CREATE_DATE as createDate, UPDATE_DATE as updateDate FROM ADMIN ORDER BY UPDATE_DATE DESC")
+	@Select("SELECT ID as id,USER_NAME as username, PASSWORD as password, STATE as state, SALT as salt, CREATE_DATE as createDate, UPDATE_DATE as updateDate FROM ADMIN ORDER BY UPDATE_DATE DESC")
 	List<Admin> queryAll();
 	
-	@Insert("INSERT INTO ADMIN(ID,USER_NAME,PASSWORD,CREATE_DATE,UPDATE_DATE) VALUES(#{id}, #{username},#{password}, #{createDate},#{updateDate})")
+	@Insert("INSERT INTO ADMIN(ID,USER_NAME,PASSWORD,STATE, SALT,CREATE_DATE,UPDATE_DATE) VALUES(#{id}, #{username},#{password},#{state},#{salt}, #{createDate},#{updateDate})")
 	@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn="id")
 	@Transactional
 	int insert(Admin model);
