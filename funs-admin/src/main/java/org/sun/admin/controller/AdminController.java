@@ -3,6 +3,8 @@ package org.sun.admin.controller;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.sun.admin.service.AdminService;
+import org.sun.admin.shiro.CustomerAuthenticationToken;
 import org.sun.model.Admin;
 import org.sun.model.AdminRole;
 import org.sun.model.Role;
@@ -146,5 +149,21 @@ public class AdminController {
 			return adminService.updateAdminRole(model);
 		}
 		return 0;
+	}
+	
+	@PostMapping("/login")
+	public int login(@RequestBody Admin model) {
+		logger.debug("===login "+model.toString());
+		int result = 1;
+		Subject subject = SecurityUtils.getSubject();
+		CustomerAuthenticationToken token = new CustomerAuthenticationToken(model.getUsername(), model.getPassword(), true);
+		try {
+			subject.login(token);
+			result = 0;
+		} catch (Exception e) {
+			logger.error("===login token exception "+e);
+		}
+		
+		return result;
 	}
 }

@@ -53,9 +53,16 @@ public class RedisConfig extends CachingConfigurerSupport{
     
     @Value("${shiro.cache.cache-time}")
     private int cacheTime;
+    
+    @Value("${shiro.session.session-prefix}")
+    private String sessionPrefix;
+
+    @Value("${shiro.session.session-time}")
+    private int sessionTime;
+    
     @Bean
     public JedisPool redisPoolFactory() {
-        logger.info("JedisPool successed");
+        logger.info("===JedisPool successed");
         JedisPool jedisPool = new JedisPool(getJedisPoolConfig(), host, port, timeout, password);
         return jedisPool;
     }
@@ -77,13 +84,13 @@ public class RedisConfig extends CachingConfigurerSupport{
         jedisConnectionFactory.setTimeout(timeout);
         jedisConnectionFactory.setPoolConfig(getJedisPoolConfig());
         jedisConnectionFactory.setUsePool(true);
-        logger.info("JedisConnectionFactory successed");
+        logger.info("===JedisConnectionFactory successed");
         return jedisConnectionFactory;
     }
     
     @Bean
     public CacheManager cacheManager(RedisTemplate redisTemplate) {
-        logger.info("cacheManager sucessed");
+        logger.info("===cacheManager sucessed");
         RedisCacheManager redisCacheManager = new RedisCacheManager(redisTemplate);
         //设置缓存过期时间
         redisCacheManager.setDefaultExpiration(1800);//秒
@@ -92,7 +99,7 @@ public class RedisConfig extends CachingConfigurerSupport{
     
     @Bean(name = "redisTemplate")
     public RedisTemplate<String, Object> getRedisTemplate() {
-        logger.info("redisTemplatet successed");
+        logger.info("===redisTemplatet successed");
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
@@ -116,5 +123,21 @@ public class RedisConfig extends CachingConfigurerSupport{
 
 	public void setCachePrefix(String cachePrefix) {
 		this.cachePrefix = cachePrefix;
+	}
+
+	public String getSessionPrefix() {
+		return sessionPrefix;
+	}
+
+	public void setSessionPrefix(String sessionPrefix) {
+		this.sessionPrefix = sessionPrefix;
+	}
+
+	public int getSessionTime() {
+		return sessionTime;
+	}
+
+	public void setSessionTime(int sessionTime) {
+		this.sessionTime = sessionTime;
 	}
 }

@@ -4,6 +4,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -40,11 +41,16 @@ public class AdminShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        logger.info("===doGetAuthenticationInfo()");
+        logger.info("===认证:doGetAuthenticationInfo()");
         String username = (String)token.getPrincipal();
         Admin userInfo = adminService.getAdminByUsername(username);
         if(userInfo == null){
             throw new UnknownAccountException();
+        }
+        
+        if (userInfo.getState() == 1) {
+            // 用户被管理员锁定抛出异常
+            throw new LockedAccountException();
         }
        /*
         * 获取权限信息:这里没有进行实现，
@@ -60,7 +66,7 @@ public class AdminShiroRealm extends AuthorizingRealm {
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
                 userInfo, //用户名
                 userInfo.getPassword(), //密码
-                ByteSource.Util.bytes(userInfo.getSalt()),//salt=username+salt
+                new MSimpleByteSource(userInfo.getSalt().getBytes()),
                 userInfo.getUsername()  //realm name
         );
 
@@ -92,6 +98,7 @@ public class AdminShiroRealm extends AuthorizingRealm {
 //        */
 //        logger.info("后台权限校验-->AdminShiroRealm.doGetAuthorizationInfo()");
 //
+    	logger.info("===授权:doGetAuthorizationInfo()");
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 //        Admin userInfo  = (Admin)principals.getPrimaryPrincipal();
 //        Set<String> menus = null;

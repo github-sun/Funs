@@ -21,6 +21,11 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 import org.sun.admin.config.RedisConfig;
 
+/**
+* @author sun 
+* @date Jan 16, 2018 2:32:55 PM
+* 
+*/
 @Repository("redisCacheManager")
 public class RedisCacheManager implements CacheManager {
 
@@ -36,7 +41,7 @@ public class RedisCacheManager implements CacheManager {
 
     @Override
     public <K, V> Cache<K, V> getCache(String name) throws CacheException {
-        logger.debug("获取名称为: " + name + " 的RedisCache实例");
+        logger.debug("===获取名称为: " + name + " 的RedisCache实例");
         Cache c = caches.get(name);
 
         if(c == null){
