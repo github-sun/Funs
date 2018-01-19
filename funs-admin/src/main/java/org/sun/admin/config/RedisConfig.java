@@ -99,7 +99,7 @@ public class RedisConfig extends CachingConfigurerSupport{
     
     @Bean(name = "redisTemplate")
     public RedisTemplate<String, Object> getRedisTemplate() {
-        logger.info("===redisTemplatet successed");
+        logger.info("===redisTemplatet successed"); 
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());

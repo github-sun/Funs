@@ -15,9 +15,7 @@ public class AdminFormAuthenticationFilter extends FormAuthenticationFilter {
 	
     @Override
     public void setLoginUrl(String loginUrl) {
-    	//logger.info("===setLoginUrl()");
-    	System.out.println("===setLoginUrl()");
-        super.setLoginUrl("/console/login");
+        super.setLoginUrl("/index");
     }
 
     @Override

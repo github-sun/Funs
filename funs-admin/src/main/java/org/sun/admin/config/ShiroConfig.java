@@ -49,12 +49,14 @@ public class ShiroConfig {
 
 	@Bean(name = "adminShiroRealm")
 	public AdminShiroRealm adminShiroRealm() {
-		logger.info("===adminShiroRealm()");
+		logger.info("===adminShiroRealm()"); 
 		AdminShiroRealm adminShiroRealm = new AdminShiroRealm();
-		adminShiroRealm.setAuthenticationCachingEnabled(true);
+		adminShiroRealm.setCachingEnabled(true);   
+		adminShiroRealm.setAuthenticationCachingEnabled(true); 
 		adminShiroRealm.setCacheManager(redisCacheManager());// redis权限缓存 默认缓存可注释此行
 		adminShiroRealm.setCredentialsMatcher(adminHashedCredentialsMatcher());
-		return adminShiroRealm;
+		
+		return adminShiroRealm; 
 	}
 
 	@Bean(name = "redisCacheManager")
@@ -65,19 +67,19 @@ public class ShiroConfig {
 
 	@Bean(name = "redisSessionDAO")
 	public RedisSessionDAO redisSessionDAO() {
-		logger.debug("ShiroConfiguration.redisSessionDAO()");
+		logger.debug("===redisSessionDAO()");
 		return new RedisSessionDAO();
 	}
 	
     @Bean(name = "customSessionListener")
     public CustomSessionListener customSessionListener(){
-        logger.debug("ShiroConfiguration.customSessionListener()");
+        logger.debug("===customSessionListener()");
         return new CustomSessionListener();
     }
 
 	@Bean(name = "sessionManager")
 	public DefaultWebSessionManager defaultWebSessionManager() {
-		logger.debug("ShiroConfiguration.defaultWebSessionManager()");
+		logger.debug("===defaultWebSessionManager()");
 		DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
 		// 用户信息必须是序列化格式，要不创建用户信息创建不过去，此坑很大，
 		sessionManager.setSessionDAO(redisSessionDAO());// 如不想使用REDIS可注释此行
@@ -107,7 +109,7 @@ public class ShiroConfig {
 		hashedCredentialsMatcher.setHashAlgorithmName("md5");// 散列算法:这里使用MD5算法;
 		hashedCredentialsMatcher.setHashIterations(2);// 散列的次数，当于 m比如散列两次，相d5(md5(""));
 		return hashedCredentialsMatcher;
-	}
+	} 
 
 	@Bean(name = "authenticationStrategy")
 	public AuthenticationStrategy authenticationStrategy() {
@@ -141,7 +143,7 @@ public class ShiroConfig {
 
 	@Bean(name = "shiroFilter")
 	public ShiroFilterFactoryBean shiroFilter(DefaultWebSecurityManager securityManager) {
-		logger.info("ShiroConfiguration.shirFilter()");
+		logger.info("===shirFilter()");
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 		// 必须设置 SecurityManager
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
@@ -175,7 +177,8 @@ public class ShiroConfig {
 		// filterChainDefinitionMap.put("/**/logout", "logout");
 		// filterChainDefinitionMap.put("/**/reg", "anon");
 		// 配置记住我或认证通过可以访问的地址
-		filterChainDefinitionMap.put("/admin/**", "admin");
+		filterChainDefinitionMap.put("/admin*", "admin");
+		filterChainDefinitionMap.put("/login*", "anon");
 
 		// 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
 		// shiroFilterFactoryBean.setLoginUrl("/member/login");
@@ -189,7 +192,7 @@ public class ShiroConfig {
 	
     @Bean(name = "lifecycleBeanPostProcessor")
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
-        logger.debug("ShiroConfiguration.lifecycleBeanPostProcessor()");
+        logger.debug("===lifecycleBeanPostProcessor()");
         return new LifecycleBeanPostProcessor();
     }
 
@@ -197,7 +200,7 @@ public class ShiroConfig {
     @Bean(name = "defaultAdvisorAutoProxyCreator")
     @DependsOn("lifecycleBeanPostProcessor")
     public DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {
-        logger.debug("ShiroConfiguration.getDefaultAdvisorAutoProxyCreator()");
+        logger.debug("===getDefaultAdvisorAutoProxyCreator()");
         DefaultAdvisorAutoProxyCreator daap = new DefaultAdvisorAutoProxyCreator();
         daap.setProxyTargetClass(true);
         return daap;
@@ -205,7 +208,7 @@ public class ShiroConfig {
     
     @Bean(name="authorizationAttributeSourceAdvisor")
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(DefaultWebSecurityManager securityManager){
-        logger.debug("ShiroConfiguration.authorizationAttributeSourceAdvisor()");
+        logger.debug("===authorizationAttributeSourceAdvisor()");
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;

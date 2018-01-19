@@ -1,5 +1,8 @@
 package org.sun.admin.shiro;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -12,7 +15,6 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,6 +110,10 @@ public class AdminShiroRealm extends AuthorizingRealm {
 //            menus = menuService.findMenuCodeByUserId(userInfo.getUid());
 //        }
 //        authorizationInfo.setStringPermissions(menus);
+        
+        Set<String> menus = new HashSet<>();
+        menus.add("/admin");
+        authorizationInfo.setStringPermissions(menus);
         return authorizationInfo;
     }
 
@@ -117,7 +123,7 @@ public class AdminShiroRealm extends AuthorizingRealm {
 	public void clearCachedAuthorizationInfo() {
         PrincipalCollection principalCollection = SecurityUtils.getSubject().getPrincipals();
         SimplePrincipalCollection principals = new SimplePrincipalCollection(
-                principalCollection, getName());
+                principalCollection, getName()); 
         super.clearCachedAuthorizationInfo(principals);
     }
     /**

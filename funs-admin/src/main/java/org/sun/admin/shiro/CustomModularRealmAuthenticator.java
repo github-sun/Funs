@@ -44,6 +44,7 @@ public class CustomModularRealmAuthenticator extends ModularRealmAuthenticator {
 		}
 		AuthenticationInfo info = null;
 		try {
+			logger.debug("===doSingleRealmAuthentication realm "+realm + " token "+token);
 			info = realm.getAuthenticationInfo(token);
 			if (info == null) {
 				throw new ShiroException("token不存在!");
