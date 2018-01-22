@@ -3,6 +3,9 @@ package org.sun.admin.controller;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ThreadContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +44,14 @@ public class AdminController {
 	
 	@GetMapping("/admin")
 	public List<Admin> getAdminDatas() {
+		Subject subject = ThreadContext.getSubject();
+		logger.info("===getAdminDatas subject "+subject); 
+		if (subject != null) {
+			
+			logger.info("===getAdminDatas subject.isAuthenticated "+subject.isAuthenticated() + " getSession "+subject.getSession().getId()); 
+		}
 		List<Admin> list = adminService.getAdminDatas();
-		logger.info("===getAdminDatas "+list);
+		logger.info("===getAdminDatas "+list + " subject "+subject);
 		return list;
 	}
 	

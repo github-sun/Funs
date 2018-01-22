@@ -1,7 +1,10 @@
    var getAdminRoleDatas = function(){
 		$.ajax({
                    type: "GET",
-		   url: 'http://localhost:8080/adminrole',
+				   url: 'http://localhost:8080/adminrole',
+		           xhrFields: {
+		               withCredentials: true
+		            },
 		   success: function(data) {
 			jQuery.each(data, function(i, val) {
 				 var strHTML = "<tr><td>" + val.adminId + "</td><td>" + val.roleId + "</td><td>"+val.username+"</td><td>"+val.rolename+"</td><td><a onclick='deleteAdminRoleSubmit("+val.adminId+","+val.roleId+")' href='#'>删除</a></td></tr>";
@@ -23,7 +26,10 @@
 	   var selector_rolename=$('#item_rolename'); 
 		$.ajax({
                   type: "GET",
-		   url: 'http://localhost:8080/admin',
+				   url: 'http://localhost:8080/admin',
+		           xhrFields: {
+		               withCredentials: true
+		            },
 		   success: function(data) {
 				jQuery.each(data, function(i, val) {
 					selector_username.append('<option value="'+val.id+'">'+val.username+'</option>');  
@@ -39,7 +45,10 @@
 		
 		$.ajax({
                   type: "GET",
-		   url: 'http://localhost:8080/role',
+				   url: 'http://localhost:8080/role',
+		           xhrFields: {
+		               withCredentials: true
+		            },
 		   success: function(data) {
 				jQuery.each(data, function(i, val) {
 					selector_rolename.append('<option value="'+val.id+'">'+val.rolename+'</option>');  
@@ -59,7 +68,10 @@
 	   var selector_rolename=$('#item_rolename'); 
 		$.ajax({
                  type: "GET",
-		   url: 'http://localhost:8080/admin',
+				   url: 'http://localhost:8080/admin',
+		           xhrFields: {
+		               withCredentials: true
+		            },
 		   success: function(data) {
 				jQuery.each(data, function(i, val) {
 					if (admin_id == val.id) {
@@ -80,7 +92,10 @@
 		
 		$.ajax({
                  type: "GET",
-		   url: 'http://localhost:8080/role',
+				   url: 'http://localhost:8080/role',
+		           xhrFields: {
+		               withCredentials: true
+		            },
 		   success: function(data) {
 				jQuery.each(data, function(i, val) {
 					if (role_id == val.id) {
@@ -112,7 +127,10 @@
         var data = {'adminId': admin_id, 'roleId':role_id};
 	    $.ajax({
                    type: "POST",
-		   url: 'http://localhost:8080/adminrole',
+				   url: 'http://localhost:8080/adminrole',
+		           xhrFields: {
+		               withCredentials: true
+		            },
                    contentType:"application/json",     
                    data: JSON.stringify(data), 
 		   success: function(result) {
@@ -136,6 +154,9 @@
 	    $.ajax({
                    type: "DELETE",
 		   url: 'http://localhost:8080/adminrole/'+adminId + "/"+roleId,
+           xhrFields: {
+               withCredentials: true
+            },
 		   success: function() {
 			$(window).attr('location','./adminrole.html');
 		   },
@@ -156,6 +177,9 @@
 		$.ajax({
                    type: "GET",
 		   url: 'http://localhost:8080/adminrole/'+adminid+"/"+roleId,
+           xhrFields: {
+               withCredentials: true
+            },
 		   success: function(data) {
                         $('#item_id').val(data.id);
                         $('#item_rolename').val(data.rolename);
@@ -182,6 +206,9 @@
         $.ajax({
 	            type: "PUT",
 		   url: 'http://localhost:8080/adminrole',
+           xhrFields: {
+               withCredentials: true
+            },
 	            contentType:"application/json",     
 	            data: JSON.stringify(data), 
 		   success: function(result) {

@@ -53,10 +53,7 @@ public class RedisSessionDAO extends AbstractSessionDAO {
         // 先从缓存中获取session，如果没有再去数据库中获取
         Session session = null;
         if(session == null){
-        	String key = getKey(sessionId.toString());
-        	logger.info("===readSession333333333:{}", key);
             session = (Session) redisTemplate.opsForValue().get(getKey(sessionId.toString()));
-            logger.info("===readSession222222222:{}", session.getId());
         }
         return session;
     }

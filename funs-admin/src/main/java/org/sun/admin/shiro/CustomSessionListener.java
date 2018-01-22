@@ -33,19 +33,19 @@ public class CustomSessionListener implements SessionListener {
      */
     @Override
     public void onStart(Session session) {
-        logger.info("onStart:{}", session.getId());
+        logger.info("===onStart:{}", session.getId());
     }
     /**
      * 一个回话的生命周期结束
      */
     @Override
     public void onStop(Session session) {
-        logger.info("onStop:{}", session.getId());
+        logger.info("===onStop:{}", session.getId());
     }
 
     @Override
     public void onExpiration(Session session) {
-        logger.info("onExpiration:{}", session.getId());
+        logger.info("===onExpiration:{}", session.getId());
         redisTemplate.delete(redisConfig.getSessionPrefix() + session.getId().toString());
     }
 

@@ -13,7 +13,10 @@
 	    $.ajax({
                    type: "POST",
 		   url: 'http://localhost:8080/login',
-                   contentType:"application/json",     
+                   contentType:"application/json",   
+                   xhrFields: {
+                       withCredentials: true
+                    },
                    data: JSON.stringify(data), 
 		   success: function(result) {
 			   if (result == 1) {

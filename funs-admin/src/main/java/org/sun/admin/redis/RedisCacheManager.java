@@ -38,13 +38,11 @@ public class RedisCacheManager implements CacheManager {
 
     @Autowired
     private RedisConfig redisConfig;
-    
 
     @Override
     public <K, V> Cache<K, V> getCache(String name) throws CacheException {
         logger.debug("===获取名称为: " + name + " 的RedisCache实例");
-        Cache c = caches.get(name);
- 
+        Cache<K, V> c = caches.get(name);
         if(c == null){
             c =  new RedisShiroCache<K, V>(name, redisTemplate, redisConfig);
             caches.put(name, c);

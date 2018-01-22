@@ -44,6 +44,8 @@ import org.sun.admin.shiro.CustomSessionListener;
 
 @Configuration
 public class ShiroConfig {
+	
+	public static final String DEFAULT_SESSION_ID_NAME = "SHIRO_JSESSIONID";
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -95,7 +97,7 @@ public class ShiroConfig {
 		// 是否开启 检测，默认开启
 		sessionManager.setSessionValidationSchedulerEnabled(true);
 		// 创建会话Cookie
-		Cookie cookie = new SimpleCookie(ShiroHttpSession.DEFAULT_SESSION_ID_NAME);
+		Cookie cookie = new SimpleCookie(DEFAULT_SESSION_ID_NAME);
 		cookie.setName("WEBID");
 		cookie.setHttpOnly(true);
 		sessionManager.setSessionIdCookie(cookie);
@@ -177,7 +179,7 @@ public class ShiroConfig {
 		// filterChainDefinitionMap.put("/**/logout", "logout");
 		// filterChainDefinitionMap.put("/**/reg", "anon");
 		// 配置记住我或认证通过可以访问的地址
-		filterChainDefinitionMap.put("/admin*", "admin");
+		//filterChainDefinitionMap.put("/admin*", "admin");
 		filterChainDefinitionMap.put("/login*", "anon");
 
 		// 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面

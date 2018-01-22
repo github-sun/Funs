@@ -34,7 +34,7 @@ public class LoginController {
 		logger.debug("===login "+model.toString());
 		int result = 1;
 		Subject subject = SecurityUtils.getSubject();
-		CustomerAuthenticationToken token = new CustomerAuthenticationToken(model.getUsername(), model.getPassword(), false);
+		CustomerAuthenticationToken token = new CustomerAuthenticationToken(model.getUsername(), model.getPassword(), true);
 		try {
 			subject.login(token);
 			result = 0;
