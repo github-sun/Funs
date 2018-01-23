@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.sun.admin.service.AdminService;
+import org.sun.admin.util.ResponseResultUtils;
 import org.sun.model.Admin;
+import org.sun.model.vo.ResponseResult;
 
 /**
 * @author sun 
@@ -46,6 +48,13 @@ public class AdminController {
 		List<Admin> list = adminService.getAdminDatas();
 		logger.info("===getAdminDatas "+list);
 		return list;
+	}
+	
+	@GetMapping("/admin/list")
+	public ResponseResult getAdminData1s() {
+		List<Admin> list = adminService.getAdminDatas();
+		logger.info("===getAdminDatas "+list);
+		return ResponseResultUtils.success(list);
 	}
 	
 	@RequiresPermissions("admin:add")
