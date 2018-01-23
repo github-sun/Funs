@@ -1,11 +1,15 @@
    var getRoleDatas = function(){
 		$.ajax({
                type: "GET",
-			   url: 'http://localhost:8080/role',
+			   url: 'http://localhost:8080/admin/role',
 	           xhrFields: {
 	               withCredentials: true
 	            },
 		   success: function(data) {
+			   if (data == 2) {
+				   $(window).attr('location','./login.html');
+				   return;
+			   }
 			jQuery.each(data, function(i, val) {
 			      var strHTML = "<tr><td>" + val.id + "</td><td>" + val.rolename + "</td><td>"+val.createDate+"</td><td>"+val.updateDate+"</td><td><a onclick='updateRole("+val.id+")' href='#'>修改</a>　|　<a onclick='deleteRoleSubmit("+val.id+")' href='#'>删除</a></td></tr>";
                         $('table#tblUser tbody').append(strHTML);
@@ -28,13 +32,17 @@
         var data = {'rolename': rolename};
 	    $.ajax({
                    type: "POST",
-				   url: 'http://localhost:8080/role',
+				   url: 'http://localhost:8080/admin/role',
 		           xhrFields: {
 		               withCredentials: true
 		            },
                    contentType:"application/json",     
                    data: JSON.stringify(data), 
-		   success: function() {
+		   success: function(data) {
+			   if (data == 2) {
+				   $(window).attr('location','./login.html');
+				   return;
+			   }
 			$(window).attr('location','./role.html');
 		   },
 		   statusCode: {
@@ -50,11 +58,15 @@
    var deleteRoleSubmit = function(idx){
 	    $.ajax({
                    type: "DELETE",
-				   url: 'http://localhost:8080/role/'+idx,
+				   url: 'http://localhost:8080/admin/role/'+idx,
 		           xhrFields: {
 		               withCredentials: true
 		            },
-		   success: function() {
+		   success: function(data) {
+			   if (data == 2) {
+				   $(window).attr('location','./login.html');
+				   return;
+			   }
 			$(window).attr('location','./role.html');
 		   },
 		   statusCode: {
@@ -73,11 +85,15 @@
    var getRoleById = function(idx){
 		$.ajax({
                    type: "GET",
-				   url: 'http://localhost:8080/role/'+idx,
+				   url: 'http://localhost:8080/admin/role/'+idx,
 		           xhrFields: {
 		               withCredentials: true
 		            },
 		   success: function(data) {
+			   if (data == 2) {
+				   $(window).attr('location','./login.html');
+				   return;
+			   }
                         $('#item_id').val(data.id);
                         $('#item_rolename').val(data.rolename);
 		   },
@@ -99,13 +115,17 @@
         var data = {'id':id, 'rolename': rolename};
         $.ajax({
 	            type: "PUT",
-			   url: 'http://localhost:8080/role',
+			   url: 'http://localhost:8080/admin/role',
 	           xhrFields: {
 	               withCredentials: true
 	            },
 	            contentType:"application/json",     
 	            data: JSON.stringify(data), 
-		   success: function() {
+		   success: function(data) {
+			   if (data == 2) {
+				   $(window).attr('location','./login.html');
+				   return;
+			   }
 			$(window).attr('location','./role.html');
 		   },
 		   statusCode: {

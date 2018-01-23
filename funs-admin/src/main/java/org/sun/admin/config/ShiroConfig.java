@@ -19,7 +19,6 @@ import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSource
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.Cookie;
-import org.apache.shiro.web.servlet.ShiroHttpSession;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.slf4j.Logger;
@@ -179,15 +178,15 @@ public class ShiroConfig {
 		// filterChainDefinitionMap.put("/**/logout", "logout");
 		// filterChainDefinitionMap.put("/**/reg", "anon");
 		// 配置记住我或认证通过可以访问的地址
-		//filterChainDefinitionMap.put("/admin*", "admin");
+		filterChainDefinitionMap.put("/admin/**", "admin");
 		filterChainDefinitionMap.put("/login*", "anon");
+		filterChainDefinitionMap.put("/index*", "anon");
 
 		// 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-		// shiroFilterFactoryBean.setLoginUrl("/member/login");
 		// 登录成功后要跳转的链接
 		// shiroFilterFactoryBean.setSuccessUrl("/member/index");
 		// 未授权界面;
-		// shiroFilterFactoryBean.setUnauthorizedUrl("/console/403");
+		shiroFilterFactoryBean.setUnauthorizedUrl("/index");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return shiroFilterFactoryBean;
 	}

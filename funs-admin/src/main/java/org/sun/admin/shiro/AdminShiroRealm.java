@@ -111,8 +111,9 @@ public class AdminShiroRealm extends AuthorizingRealm {
 //        }
 //        authorizationInfo.setStringPermissions(menus);
         
+        //authorizationInfo.addRole("2");
         Set<String> menus = new HashSet<>();
-        menus.add("/admin");
+        menus.add("admin:edit");
         authorizationInfo.setStringPermissions(menus);
         return authorizationInfo;
     }

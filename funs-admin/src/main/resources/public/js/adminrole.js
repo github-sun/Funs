@@ -1,11 +1,15 @@
    var getAdminRoleDatas = function(){
 		$.ajax({
                    type: "GET",
-				   url: 'http://localhost:8080/adminrole',
+				   url: 'http://localhost:8080/admin/adminrole',
 		           xhrFields: {
 		               withCredentials: true
 		            },
 		   success: function(data) {
+			   if (data == 2) {
+				   $(window).attr('location','./login.html');
+				   return;
+			   }
 			jQuery.each(data, function(i, val) {
 				 var strHTML = "<tr><td>" + val.adminId + "</td><td>" + val.roleId + "</td><td>"+val.username+"</td><td>"+val.rolename+"</td><td><a onclick='deleteAdminRoleSubmit("+val.adminId+","+val.roleId+")' href='#'>删除</a></td></tr>";
                  $('table#tblUser tbody').append(strHTML);
@@ -26,11 +30,15 @@
 	   var selector_rolename=$('#item_rolename'); 
 		$.ajax({
                   type: "GET",
-				   url: 'http://localhost:8080/admin',
+				   url: 'http://localhost:8080/admin/admin',
 		           xhrFields: {
 		               withCredentials: true
 		            },
 		   success: function(data) {
+			   if (data == 2) {
+				   $(window).attr('location','./login.html');
+				   return;
+			   }
 				jQuery.each(data, function(i, val) {
 					selector_username.append('<option value="'+val.id+'">'+val.username+'</option>');  
 				});  
@@ -45,7 +53,7 @@
 		
 		$.ajax({
                   type: "GET",
-				   url: 'http://localhost:8080/role',
+				   url: 'http://localhost:8080/admin/role',
 		           xhrFields: {
 		               withCredentials: true
 		            },
@@ -68,11 +76,15 @@
 	   var selector_rolename=$('#item_rolename'); 
 		$.ajax({
                  type: "GET",
-				   url: 'http://localhost:8080/admin',
+				   url: 'http://localhost:8080/admin/admin',
 		           xhrFields: {
 		               withCredentials: true
 		            },
 		   success: function(data) {
+			   if (data == 2) {
+				   $(window).attr('location','./login.html');
+				   return;
+			   }
 				jQuery.each(data, function(i, val) {
 					if (admin_id == val.id) {
 						selector_username.append('<option value="'+val.id+'" selected=true>'+val.username+'</option>');
@@ -92,7 +104,7 @@
 		
 		$.ajax({
                  type: "GET",
-				   url: 'http://localhost:8080/role',
+				   url: 'http://localhost:8080/admin/role',
 		           xhrFields: {
 		               withCredentials: true
 		            },
@@ -127,13 +139,17 @@
         var data = {'adminId': admin_id, 'roleId':role_id};
 	    $.ajax({
                    type: "POST",
-				   url: 'http://localhost:8080/adminrole',
+				   url: 'http://localhost:8080/admin/adminrole',
 		           xhrFields: {
 		               withCredentials: true
 		            },
                    contentType:"application/json",     
                    data: JSON.stringify(data), 
 		   success: function(result) {
+			   if (result == 2) {
+				   $(window).attr('location','./login.html');
+				   return;
+			   }
 			   if (result == 0) {
 				   alert("对照关系已存在!");
 				   return;
@@ -152,12 +168,17 @@
 
    var deleteAdminRoleSubmit = function(adminId, roleId){
 	    $.ajax({
-                   type: "DELETE",
-		   url: 'http://localhost:8080/adminrole/'+adminId + "/"+roleId,
+           type: "DELETE",
            xhrFields: {
                withCredentials: true
             },
-		   success: function() {
+		   url: 'http://localhost:8080/admin/adminrole/'+adminId + "/"+roleId,
+
+		   success: function(data) {
+			   if (data == 2) {
+				   $(window).attr('location','./login.html');
+				   return;
+			   }
 			$(window).attr('location','./adminrole.html');
 		   },
 		   statusCode: {
@@ -176,11 +197,15 @@
    var getAdminRoleById = function(adminId, roleId){
 		$.ajax({
                    type: "GET",
-		   url: 'http://localhost:8080/adminrole/'+adminid+"/"+roleId,
+		   url: 'http://localhost:8080/admin/adminrole/'+adminid+"/"+roleId,
            xhrFields: {
                withCredentials: true
             },
 		   success: function(data) {
+			   if (data == 2) {
+				   $(window).attr('location','./login.html');
+				   return;
+			   }
                         $('#item_id').val(data.id);
                         $('#item_rolename').val(data.rolename);
 		   },
@@ -205,13 +230,17 @@
         var data = {'adminId': admin_id, 'roleId':role_id};
         $.ajax({
 	            type: "PUT",
-		   url: 'http://localhost:8080/adminrole',
+		   url: 'http://localhost:8080/admin/adminrole',
            xhrFields: {
                withCredentials: true
             },
 	            contentType:"application/json",     
 	            data: JSON.stringify(data), 
 		   success: function(result) {
+			   if (result == 2) {
+				   $(window).attr('location','./login.html');
+				   return;
+			   }
 			   if (result == 0) {
 				   alert("对照关系已存在!");
 				   return;
