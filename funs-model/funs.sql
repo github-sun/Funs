@@ -41,8 +41,6 @@ CREATE TABLE `PERMISSION` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `PERMISSION_NAME` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `PERMISSION_CODE` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `PARENT_ID` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `PARENT_IDS` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `CREATE_DATE` datetime NOT NULL,
   `UPDATE_DATE` datetime NOT NULL,
   PRIMARY KEY (`ID`),

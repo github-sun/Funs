@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.transaction.annotation.Transactional;
 import org.sun.model.RolePermission;
-import org.sun.model.bo.AdminRoleBO;
+import org.sun.model.bo.RolePermissionBO;
 
 /**
 * @author sun 
@@ -22,7 +22,7 @@ import org.sun.model.bo.AdminRoleBO;
 public interface RolePermissionDAO {
 	
 	@Select("SELECT ROLE_ID as roleId, PERMISSION_ID as permissionId  FROM ROLE_PERMISSION WHERE ROLE_ID = #{roleId} and PERMISSION_ID = #{permissionId}")
-	RolePermission queryById(@Param("adminId") int adminId, @Param("roleId") int roleId);
+	RolePermission queryById(@Param("roleId") int adminId, @Param("permissionId") int roleId);
 	
 	@Select("SELECT ROLE_ID as roleId, PERMISSION_ID as permissionId  FROM ROLE_PERMISSION")
 	List<RolePermission> queryAll();
@@ -39,6 +39,6 @@ public interface RolePermissionDAO {
 	@Transactional
 	int update(RolePermission model);
 	
-	@Select("SELECT a.ADMIN_ID as adminId, a.ROLE_ID as roleId, b.USER_NAME as username, c.ROLE_NAME as rolename FROM ADMIN_ROLE a, ADMIN b, ROLE c WHERE a.ADMIN_ID=b.ID and a.ROLE_ID=c.ID")
-	List<AdminRoleBO> query();
+	@Select("SELECT a.ROLE_ID as roleId, a.PERMISSION_ID as permissionId, b.ROLE_NAME as rolename, c.PERMISSION_NAME as permissionname, c.PERMISSION_CODE as permissioncode FROM ROLE_PERMISSION a, ROLE b, PERMISSION c WHERE a.ROLE_ID=b.ID and a.PERMISSION_ID=c.ID")
+	List<RolePermissionBO> query();
 }

@@ -3,7 +3,7 @@ package org.sun.admin.service;
 import java.util.List;
 
 import org.sun.model.RolePermission;
-import org.sun.model.bo.AdminRoleBO;
+import org.sun.model.bo.RolePermissionBO;
 
 /**
  * @author sun
@@ -14,7 +14,7 @@ public interface RolePermissionService {
 
 	RolePermission getRolePermissionById(int roleId, int permissionId);
 
-	List<AdminRoleBO> getRolePermissionDatas();
+	List<RolePermissionBO> getRolePermissionDatas();
 
 	int addRolePermission(RolePermission model);
 

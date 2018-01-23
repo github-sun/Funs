@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.sun.admin.service.RolePermissionService;
 import org.sun.dao.RolePermissionDAO;
 import org.sun.model.RolePermission;
-import org.sun.model.bo.AdminRoleBO;
+import org.sun.model.bo.RolePermissionBO;
 
 /**
 * @author sun 
@@ -27,8 +27,8 @@ public class RolePermissionServiceImpl implements RolePermissionService{
 	}
 
 	@Override
-	public List<AdminRoleBO> getRolePermissionDatas() {
-		return null;
+	public List<RolePermissionBO> getRolePermissionDatas() {
+		return rolePermissionDAO.query();
 	}
 
 	@Override

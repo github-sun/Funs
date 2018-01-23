@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.sun.admin.service.RolePermissionService;
 import org.sun.model.RolePermission;
-import org.sun.model.bo.AdminRoleBO;
+import org.sun.model.bo.RolePermissionBO;
 
 /**
  * @author sun
@@ -40,8 +40,8 @@ public class RolePermissionController {
 	}
 
 	@GetMapping("/rolepermission")
-	public List<AdminRoleBO> getRolePermissionDatas() {
-		List<AdminRoleBO> list = rolePermissionService.getRolePermissionDatas();
+	public List<RolePermissionBO> getRolePermissionDatas() {
+		List<RolePermissionBO> list = rolePermissionService.getRolePermissionDatas();
 		logger.info("===getRolePermissionDatas " + list);
 		return list;
 	}
