@@ -25,4 +25,11 @@ public class Utils {
                 ByteSource.Util.bytes(model.getSalt()), hashIterations).toHex();
         model.setPassword(newPassword);
     }
+    
+    public static void main(String[] args) {
+    	String salt = randomNumberGenerator.nextBytes().toHex();
+        String newPassword = new SimpleHash(algorithmName, "111111",
+                ByteSource.Util.bytes(salt), hashIterations).toHex();
+        System.out.println("salt: "+salt + " newPassword "+newPassword);
+	}
 }

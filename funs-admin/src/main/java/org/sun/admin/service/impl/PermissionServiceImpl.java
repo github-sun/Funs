@@ -1,6 +1,8 @@
 package org.sun.admin.service.impl;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +45,19 @@ public class PermissionServiceImpl implements PermissionService{
 	@Override
 	public int updatePermission(Permission model) {
 		return permissionDAO.update(model);
+	}
+
+	@Override
+	public Set<String> getPermissions() {
+		Set<String> set = new HashSet<>();
+		List<Permission> list = permissionDAO.queryAll();
+		if (list == null) {
+			return set;
+		}
+		for (Permission permission : list) {
+			set.add(permission.getCode());
+		}
+		return set;
 	}
 
 }

@@ -1,6 +1,7 @@
 package org.sun.admin.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.sun.model.RolePermission;
 import org.sun.model.bo.RolePermissionBO;
@@ -21,4 +22,6 @@ public interface RolePermissionService {
 	int removeRolePermissionById(int roleId, int permissionId);
 
 	int updateRolePermission(RolePermission model);
+	
+	Set<String> getPermissions(String username);
 }

@@ -22,5 +22,7 @@ public interface AdminService {
 	int removeAdminById(int id);
 
 	int updateAdmin(Admin model);
+	
+	boolean isSuperUser(String username);
 
 }

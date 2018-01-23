@@ -3,6 +3,7 @@ package org.sun.admin.controller;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +33,14 @@ public class RoleController {
 	@Autowired
 	private RoleService roleService;
 	
+	@RequiresPermissions("role:list.id")
 	@GetMapping("/role/{id}")
 	public Role getRoleById(@PathVariable("id") Integer id) {
 		logger.info("===getRoleById id "+id);
 		return roleService.getRoleById(id);
 	}
 	
+	@RequiresPermissions("role:list.all")
 	@GetMapping("/role")
 	public List<Role> getRoleDatas() {
 		List<Role> list = roleService.getRoleDatas();
@@ -45,6 +48,7 @@ public class RoleController {
 		return list;
 	}
 	
+	@RequiresPermissions("role:add")
 	@PostMapping("/role")
 	public int addRole(@RequestBody Role model) {
 		Date date = new Date();
@@ -55,12 +59,14 @@ public class RoleController {
 		return model.getId();
 	}
 	
+	@RequiresPermissions("role:remove.id")
 	@DeleteMapping("/role/{id}")
 	public int removeRole(@PathVariable("id") Integer id) {
 		logger.info("===removeRole　"+id);
 		return roleService.removeRoleById(id);
 	}
 	
+	@RequiresPermissions("role:update")
 	@PutMapping("/role")
 	public int updateRole(@RequestBody Role model) {
 		logger.info("===updateRole　"+model.toString());

@@ -7,6 +7,7 @@ CREATE TABLE `ADMIN` (
   `PASSWORD` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `STATE` tinyint(1) NOT NULL DEFAULT '1',
   `SALT` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `IS_SUPER` tinyint(1) NOT NULL DEFAULT '0',
   `CREATE_DATE` datetime NOT NULL,
   `UPDATE_DATE` datetime NOT NULL,
   PRIMARY KEY (`ID`),
@@ -40,7 +41,7 @@ DROP TABLE IF EXISTS `PERMISSION`;
 CREATE TABLE `PERMISSION` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `PERMISSION_NAME` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `PERMISSION_CODE` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `PERMISSION_CODE` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `CREATE_DATE` datetime NOT NULL,
   `UPDATE_DATE` datetime NOT NULL,
   PRIMARY KEY (`ID`),
@@ -56,3 +57,9 @@ CREATE TABLE `ROLE_PERMISSION` (
   KEY `role_permission_foreign` (`PERMISSION_ID`) USING BTREE,
   CONSTRAINT `fk_ref_permission` FOREIGN KEY (`PERMISSION_ID`) REFERENCES `PERMISSION` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+
+
+#Insert Data
+INSERT INTO `ADMIN` VALUES (1,'admin', '2c16b79ac1a15289c1c7fc6e50e26d80', 0, '81c199cc717b0d11f593eb854acf6e2b', 1, '2018-01-07 13:24:17', '2017-05-09 16:05:34');

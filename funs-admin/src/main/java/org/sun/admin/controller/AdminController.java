@@ -33,13 +33,14 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
+	@RequiresPermissions("admin:list.id")
 	@GetMapping("/admin/{id}")
 	public Admin getAdminById(@PathVariable("id") Integer id) {
 		logger.info("===getAdminById id "+id);
 		return adminService.getAdminById(id);
 	}
 	
-	@RequiresPermissions("admin:edit")
+	@RequiresPermissions("admin:list.all")
 	@GetMapping("/admin")
 	public List<Admin> getAdminDatas() {
 		List<Admin> list = adminService.getAdminDatas();
@@ -47,6 +48,7 @@ public class AdminController {
 		return list;
 	}
 	
+	@RequiresPermissions("admin:add")
 	@PostMapping("/admin")
 	public int addAdmin(@RequestBody Admin model) {
 		Date date = new Date();
@@ -57,12 +59,14 @@ public class AdminController {
 		return model.getId();
 	}
 	
+	@RequiresPermissions("admin:remove.id")
 	@DeleteMapping("/admin/{id}")
 	public int removeAdmin(@PathVariable("id") Integer id) {
 		logger.info("===removeAdmin　"+id);
 		return adminService.removeAdminById(id);
 	}
 	
+	@RequiresPermissions("admin:update")
 	@PutMapping("/admin")
 	public int updateAdmin(@RequestBody Admin model) {
 		logger.info("===updateAdmin　"+model.toString());

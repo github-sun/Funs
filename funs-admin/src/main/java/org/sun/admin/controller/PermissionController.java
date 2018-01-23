@@ -33,13 +33,14 @@ public class PermissionController {
 	@Autowired
 	private PermissionService permissionService;
 	
+	@RequiresPermissions("permission:list.id")
 	@GetMapping("/permission/{id}")
 	public Permission getPermissionById(@PathVariable("id") Integer id) {
 		logger.info("===getPermissionById id "+id);
 		return permissionService.getPermissionById(id);
 	}
 	
-	@RequiresPermissions("admin:edit")
+	@RequiresPermissions("permission:list.all")
 	@GetMapping("/permission")
 	public List<Permission> getPermissionDatas() {
 		List<Permission> list = permissionService.getPermissionDatas();
@@ -47,6 +48,7 @@ public class PermissionController {
 		return list;
 	}
 	
+	@RequiresPermissions("permission:add")
 	@PostMapping("/permission")
 	public int addPermission(@RequestBody Permission model) {
 		Date date = new Date();
@@ -57,12 +59,14 @@ public class PermissionController {
 		return model.getId();
 	}
 	
+	@RequiresPermissions("permission:remove.id")
 	@DeleteMapping("/permission/{id}")
 	public int removePermission(@PathVariable("id") Integer id) {
 		logger.info("===removePermission　"+id);
 		return permissionService.removePermissionById(id);
 	}
 	
+	@RequiresPermissions("permission:update")
 	@PutMapping("/permission")
 	public int updatePermission(@RequestBody Permission model) {
 		logger.info("===updatePermission　"+model.toString());

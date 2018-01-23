@@ -32,6 +32,8 @@ public class Admin implements Serializable{
 	//加盐
 	private String salt;
 	
+	private int isSuper;
+	
 	//创建日期
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createDate;
@@ -80,6 +82,14 @@ public class Admin implements Serializable{
 		this.salt = salt;
 	}
 
+	public int getIsSuper() {
+		return isSuper;
+	}
+
+	public void setIsSuper(int isSuper) {
+		this.isSuper = isSuper;
+	}
+
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -99,6 +109,6 @@ public class Admin implements Serializable{
 	@Override
 	public String toString() {
 		return "Admin [id=" + id + ", username=" + username + ", password=" + password + ", state=" + state + ", salt="
-				+ salt + ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
+				+ salt + ", isSuper=" + isSuper + ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
 	}
 }

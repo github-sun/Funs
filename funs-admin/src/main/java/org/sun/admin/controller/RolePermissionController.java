@@ -2,6 +2,7 @@ package org.sun.admin.controller;
 
 import java.util.List;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class RolePermissionController {
 	@Autowired
 	private RolePermissionService rolePermissionService;
 
+	@RequiresPermissions("rolepermission:list.id")
 	@GetMapping("/rolepermission/{roleId}/{permissionId}")
 	public RolePermission getRolePermissionById(@PathVariable("roleId") Integer roleId,
 			@PathVariable("permissionId") Integer permissionId) {
@@ -39,6 +41,7 @@ public class RolePermissionController {
 		return rolePermissionService.getRolePermissionById(roleId, permissionId);
 	}
 
+	@RequiresPermissions("rolepermission:list.all")
 	@GetMapping("/rolepermission")
 	public List<RolePermissionBO> getRolePermissionDatas() {
 		List<RolePermissionBO> list = rolePermissionService.getRolePermissionDatas();
@@ -46,6 +49,7 @@ public class RolePermissionController {
 		return list;
 	}
 
+	@RequiresPermissions("rolepermission:add")
 	@PostMapping("/rolepermission")
 	public int addRolePermission(@RequestBody RolePermission model) {
 		RolePermission rolePermission = rolePermissionService.getRolePermissionById(model.getRoleId(),
@@ -57,6 +61,7 @@ public class RolePermissionController {
 		return 0;
 	}
 
+	@RequiresPermissions("rolepermission:remove.id")
 	@DeleteMapping("/rolepermission/{roleId}/{permissionId}")
 	public int removeRolePermission(@PathVariable("roleId") Integer roleId,
 			@PathVariable("permissionId") Integer permissionId) {
@@ -64,6 +69,7 @@ public class RolePermissionController {
 		return rolePermissionService.removeRolePermissionById(roleId, permissionId);
 	}
 
+	@RequiresPermissions("rolepermission:update")
 	@PutMapping("/rolepermission")
 	public int updateRolePermission(@RequestBody RolePermission model) {
 		RolePermission rolePermission = rolePermissionService.getRolePermissionById(model.getRoleId(),

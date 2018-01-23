@@ -21,13 +21,13 @@ import org.sun.model.Admin;
 @Mapper
 public interface AdminDAO {
 	
-	@Select("SELECT ID as id,USER_NAME as username, PASSWORD as password, STATE as state, SALT as salt, CREATE_DATE as createDate, UPDATE_DATE as updateDate FROM ADMIN WHERE USER_NAME = #{username}")
+	@Select("SELECT ID as id,USER_NAME as username, PASSWORD as password, STATE as state, SALT as salt, IS_SUPER as isSuper, CREATE_DATE as createDate, UPDATE_DATE as updateDate FROM ADMIN WHERE USER_NAME = #{username} and IS_SUPER=0")
 	Admin queryByUsername(@Param("username") String username);
 	
-	@Select("SELECT ID as id,USER_NAME as username, PASSWORD as password, STATE as state, SALT as salt, CREATE_DATE as createDate, UPDATE_DATE as updateDate FROM ADMIN WHERE ID = #{id}")
+	@Select("SELECT ID as id,USER_NAME as username, PASSWORD as password, STATE as state, SALT as salt, IS_SUPER as isSuper, CREATE_DATE as createDate, UPDATE_DATE as updateDate FROM ADMIN WHERE ID = #{id} and IS_SUPER=0")
 	Admin queryById(@Param("id") int id);
 	
-	@Select("SELECT ID as id,USER_NAME as username, PASSWORD as password, STATE as state, SALT as salt, CREATE_DATE as createDate, UPDATE_DATE as updateDate FROM ADMIN ORDER BY UPDATE_DATE DESC")
+	@Select("SELECT ID as id,USER_NAME as username, PASSWORD as password, STATE as state, SALT as salt, IS_SUPER as isSuper, CREATE_DATE as createDate, UPDATE_DATE as updateDate FROM ADMIN WHERE IS_SUPER=0 ORDER BY UPDATE_DATE DESC")
 	List<Admin> queryAll();
 	
 	@Insert("INSERT INTO ADMIN(ID,USER_NAME,PASSWORD,STATE, SALT,CREATE_DATE,UPDATE_DATE) VALUES(#{id}, #{username},#{password},#{state},#{salt}, #{createDate},#{updateDate})")
@@ -42,4 +42,7 @@ public interface AdminDAO {
 	@Update("UPDATE ADMIN SET USER_NAME=#{username},PASSWORD=#{password},UPDATE_DATE=#{updateDate} WHERE ID=#{id}")
 	@Transactional
 	int update(Admin model);
+	
+	@Select("SELECT IS_SUPER as isSuper FROM ADMIN WHERE USER_NAME = #{username}")
+	int querySuperByUsername(@Param("username") String username);
 }

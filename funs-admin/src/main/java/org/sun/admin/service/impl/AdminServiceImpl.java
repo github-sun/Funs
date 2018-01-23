@@ -52,4 +52,9 @@ public class AdminServiceImpl implements AdminService{
 		return adminDAO.update(model);
 	}
 
+	@Override
+	public boolean isSuperUser(String username) {
+		return adminDAO.querySuperByUsername(username) == 1 ? true : false;
+	}
+
 }

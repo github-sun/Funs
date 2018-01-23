@@ -2,6 +2,7 @@ package org.sun.admin.controller;
 
 import java.util.List;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +33,14 @@ public class AdminRoleController {
 	@Autowired
 	private AdminRoleService adminRoleService;
 	
+	@RequiresPermissions("adminrole:list.id")
 	@GetMapping("/adminrole/{adminId}/{roleId}")
 	public AdminRole getAdminRoleById(@PathVariable("adminId") Integer adminId,@PathVariable("roleId") Integer roleId) {
 		logger.info("===getAdminRoleById adminId "+adminId + " roleId "+roleId);
 		return adminRoleService.getAdminRoleById(adminId, roleId);
 	}
 	
+	@RequiresPermissions("adminrole:list.all")
 	@GetMapping("/adminrole")
 	public List<AdminRoleBO> getAdminRoleDatas() {
 		List<AdminRoleBO> list = adminRoleService.getAdminRoleDatas();
@@ -45,6 +48,7 @@ public class AdminRoleController {
 		return list;
 	}
 	
+	@RequiresPermissions("adminrole:add")
 	@PostMapping("/adminrole")
 	public int addAdminRole(@RequestBody AdminRole model) {
 		AdminRole adminRole = adminRoleService.getAdminRoleById(model.getAdminId(), model.getRoleId());
@@ -55,12 +59,14 @@ public class AdminRoleController {
 		return 0;
 	}
 	
+	@RequiresPermissions("adminrole:remove.id")
 	@DeleteMapping("/adminrole/{admin_id}/{role_id}")
 	public int removeAdminRole(@PathVariable("admin_id") Integer adminId,@PathVariable("role_id") Integer roleId) {
 		logger.info("===removeAdminRole　admin_id "+adminId + " role_id "+roleId);
 		return adminRoleService.removeAdminRoleById(adminId, roleId);
 	}
 	
+	@RequiresPermissions("adminrole:update")
 	@PutMapping("/adminrole")
 	public int updateAdminRole(@RequestBody AdminRole model) {
 		AdminRole adminRole = adminRoleService.getAdminRoleById(model.getAdminId(), model.getRoleId());
