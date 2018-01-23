@@ -16,16 +16,6 @@ import org.springframework.http.MediaType;
 public class AdminFormAuthenticationFilter extends FormAuthenticationFilter {
 
 	@Override
-	public void setLoginUrl(String loginUrl) {
-		super.setLoginUrl("/index");
-	}
-
-	@Override
-	public void setSuccessUrl(String successUrl) {
-		super.setSuccessUrl("/console/index");
-	}
-
-	@Override
 	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
 		if (isLoginRequest(request, response)) {
 			if (isLoginSubmission(request, response)) {

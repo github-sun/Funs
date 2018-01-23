@@ -3,9 +3,6 @@ package org.sun.admin.service;
 import java.util.List;
 
 import org.sun.model.Admin;
-import org.sun.model.AdminRole;
-import org.sun.model.Role;
-import org.sun.model.bo.AdminRoleBO;
 
 /**
  * @author sun
@@ -26,23 +23,4 @@ public interface AdminService {
 
 	int updateAdmin(Admin model);
 
-	Role getRoleById(int id);
-
-	List<Role> getRoleDatas();
-
-	int addRole(Role model);
-
-	int removeRoleById(int id);
-
-	int updateRole(Role model);
-
-	AdminRole getAdminRoleById(int adminId, int roleId);
-
-	List<AdminRoleBO> getAdminRoleDatas();
-
-	int addAdminRole(AdminRole model);
-
-	int removeAdminRoleById(int adminId, int roleId);
-
-	int updateAdminRole(AdminRole model);
 }

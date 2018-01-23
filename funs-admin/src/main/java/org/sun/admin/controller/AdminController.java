@@ -17,9 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.sun.admin.service.AdminService;
 import org.sun.model.Admin;
-import org.sun.model.AdminRole;
-import org.sun.model.Role;
-import org.sun.model.bo.AdminRoleBO;
 
 /**
 * @author sun 
@@ -42,18 +39,11 @@ public class AdminController {
 		return adminService.getAdminById(id);
 	}
 	
-	//@RequiresRoles("2")
 	@RequiresPermissions("admin:edit")
 	@GetMapping("/admin")
 	public List<Admin> getAdminDatas() {
-//		Subject subject = ThreadContext.getSubject();
-//		logger.info("===getAdminDatas subject "+subject); 
-//		if (subject != null) {
-//			
-//			logger.info("===getAdminDatas subject.isAuthenticated "+subject.isAuthenticated() + " getSession "+subject.getSession().getId()); 
-//		}
 		List<Admin> list = adminService.getAdminDatas();
-//		logger.info("===getAdminDatas "+list + " subject "+subject);
+		logger.info("===getAdminDatas "+list);
 		return list;
 	}
 	
@@ -82,80 +72,4 @@ public class AdminController {
 		return result;
 	}
 	
-	@GetMapping("/role/{id}")
-	public Role getRoleById(@PathVariable("id") Integer id) {
-		logger.info("===getRoleById id "+id);
-		return adminService.getRoleById(id);
-	}
-	
-	@GetMapping("/role")
-	public List<Role> getRoleDatas() {
-		List<Role> list = adminService.getRoleDatas();
-		logger.info("===getRoleDatas "+list);
-		return list;
-	}
-	
-	@PostMapping("/role")
-	public int addRole(@RequestBody Role model) {
-		Date date = new Date();
-		model.setCreateDate(date);
-		model.setUpdateDate(date);
-		adminService.addRole(model);
-		logger.info("===addRole　"+model.toString());
-		return model.getId();
-	}
-	
-	@DeleteMapping("/role/{id}")
-	public int removeRole(@PathVariable("id") Integer id) {
-		logger.info("===removeRole　"+id);
-		return adminService.removeRoleById(id);
-	}
-	
-	@PutMapping("/role")
-	public int updateRole(@RequestBody Role model) {
-		logger.info("===updateRole　"+model.toString());
-		model.setUpdateDate(new Date());
-		int result = adminService.updateRole(model);
-		logger.info("===updateRole　"+model.toString() + " result "+result);
-		return result;
-	}
-	
-	@GetMapping("/adminrole/{adminId}/{roleId}")
-	public AdminRole getAdminRoleById(@PathVariable("adminId") Integer adminId,@PathVariable("roleId") Integer roleId) {
-		logger.info("===getAdminRoleById adminId "+adminId + " roleId "+roleId);
-		return adminService.getAdminRoleById(adminId, roleId);
-	}
-	
-	@GetMapping("/adminrole")
-	public List<AdminRoleBO> getAdminRoleDatas() {
-		List<AdminRoleBO> list = adminService.getAdminRoleDatas();
-		logger.info("===getAdminRoleDatas "+list);
-		return list;
-	}
-	
-	@PostMapping("/adminrole")
-	public int addAdminRole(@RequestBody AdminRole model) {
-		AdminRole adminRole = adminService.getAdminRoleById(model.getAdminId(), model.getRoleId());
-		logger.info("===addAdminRole　"+model.toString() + " adminRole " +adminRole);
-		if (null == adminRole) {
-			return adminService.addAdminRole(model);
-		}
-		return 0;
-	}
-	
-	@DeleteMapping("/adminrole/{admin_id}/{role_id}")
-	public int removeAdminRole(@PathVariable("admin_id") Integer adminId,@PathVariable("role_id") Integer roleId) {
-		logger.info("===removeAdminRole　admin_id "+adminId + " role_id "+roleId);
-		return adminService.removeAdminRoleById(adminId, roleId);
-	}
-	
-	@PutMapping("/adminrole")
-	public int updateAdminRole(@RequestBody AdminRole model) {
-		AdminRole adminRole = adminService.getAdminRoleById(model.getAdminId(), model.getRoleId());
-		logger.info("===updateAdminRole　"+model.toString() + " adminRole " +adminRole);
-		if (null == adminRole) {
-			return adminService.updateAdminRole(model);
-		}
-		return 0;
-	}
 }

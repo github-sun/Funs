@@ -21,10 +21,10 @@ import org.sun.model.bo.AdminRoleBO;
 @Mapper
 public interface AdminRoleDAO {
 	
-	@Select("SELECT ADMIN_ID as adminID, ROLE_ID as roleId  FROM ADMIN_ROLE WHERE ADMIN_ID = #{adminId} and ROLE_ID = #{roleId}")
-	AdminRole queryById(@Param("adminId") int admin_id, @Param("roleId") int role_id);
+	@Select("SELECT ADMIN_ID as adminId, ROLE_ID as roleId  FROM ADMIN_ROLE WHERE ADMIN_ID = #{adminId} and ROLE_ID = #{roleId}")
+	AdminRole queryById(@Param("adminId") int adminId, @Param("roleId") int roleId);
 	
-	@Select("SELECT ADMIN_ID as adminID, ROLE_ID as roleId  FROM ADMIN_ROLE")
+	@Select("SELECT ADMIN_ID as adminId, ROLE_ID as roleId  FROM ADMIN_ROLE")
 	List<AdminRole> queryAll();
 	
 	@Insert("INSERT INTO ADMIN_ROLE(ADMIN_ID,ROLE_ID) VALUES(#{adminId}, #{roleId})")
