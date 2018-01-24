@@ -24,4 +24,6 @@ public interface RolePermissionService {
 	int updateRolePermission(RolePermission model);
 	
 	Set<String> getPermissions(String username);
+	
+	List<String> getUserAuthzByPermission(int roleId, int permissionId);
 }

@@ -1,6 +1,7 @@
 package org.sun.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -10,7 +11,6 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.transaction.annotation.Transactional;
 import org.sun.model.RolePermission;
-import org.sun.model.bo.PermissionBO;
 import org.sun.model.bo.RolePermissionBO;
 
 /**
@@ -43,6 +43,9 @@ public interface RolePermissionDAO {
 	@Select("SELECT a.ROLE_ID as roleId, a.PERMISSION_ID as permissionId, b.ROLE_NAME as rolename, c.PERMISSION_NAME as permissionname, c.PERMISSION_CODE as permissioncode FROM ROLE_PERMISSION a, ROLE b, PERMISSION c WHERE a.ROLE_ID=b.ID and a.PERMISSION_ID=c.ID")
 	List<RolePermissionBO> query();
 	
-	@Select("SELECT d.PERMISSION_CODE as code FROM ADMIN a, ADMIN_ROLE b, ROLE_PERMISSION c, PERMISSION d WHERE a.USER_NAME=#{username} and a.ID = b.ADMIN_ID and b.ROLE_ID = c.ROLE_ID and c.PERMISSION_ID = d.ID")
-	List<PermissionBO> queryPermissions(@Param("username") String username);
+	@Select("SELECT distinct d.PERMISSION_CODE as code FROM ADMIN a, ADMIN_ROLE b, ROLE_PERMISSION c, PERMISSION d WHERE a.USER_NAME=#{username} and a.ID = b.ADMIN_ID and b.ROLE_ID = c.ROLE_ID and c.PERMISSION_ID = d.ID")
+	Set<String> queryPermissions(@Param("username") String username);
+	
+	@Select("SELECT CONCAT('authz:',c.USER_NAME) as username FROM ROLE_PERMISSION a, ADMIN_ROLE b, ADMIN c WHERE a.ROLE_ID = #{roleId} and a.PERMISSION_ID = #{permissionId} and a.ROLE_ID = b.ROLE_ID and b.ADMIN_ID = c.ID")
+	List<String> queryUser(@Param("roleId") int roleId, @Param("permissionId") int permissionId);
 }

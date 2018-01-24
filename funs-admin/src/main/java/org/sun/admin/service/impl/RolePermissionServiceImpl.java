@@ -1,6 +1,5 @@
 package org.sun.admin.service.impl;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.sun.admin.service.RolePermissionService;
 import org.sun.dao.RolePermissionDAO;
 import org.sun.model.RolePermission;
-import org.sun.model.bo.PermissionBO;
 import org.sun.model.bo.RolePermissionBO;
 
 /**
@@ -51,15 +49,13 @@ public class RolePermissionServiceImpl implements RolePermissionService{
 
 	@Override
 	public Set<String> getPermissions(String username) {
-		Set<String> set = new HashSet<>();
-		List<PermissionBO> list = rolePermissionDAO.queryPermissions(username);
-		if (list == null) {
-			return set;
-		}
-		for (PermissionBO permissionBO : list) {
-			set.add(permissionBO.getCode());
-		}
+		Set<String> set = rolePermissionDAO.queryPermissions(username);
 		return set;
+	}
+
+	@Override
+	public List<String> getUserAuthzByPermission(int roleId, int permissionId) {
+		return rolePermissionDAO.queryUser(roleId, permissionId);
 	}
  
 }

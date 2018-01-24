@@ -155,38 +155,8 @@ public class ShiroConfig {
 		// 拦截器.
 		Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 
-		// 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
-		/**
-		 * anon（匿名） org.apache.shiro.web.filter.authc.AnonymousFilter authc（身份验证）
-		 * org.apache.shiro.web.filter.authc.FormAuthenticationFilter
-		 * authcBasic（http基本验证）
-		 * org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter logout（退出）
-		 * org.apache.shiro.web.filter.authc.LogoutFilter noSessionCreation（不创建session）
-		 * org.apache.shiro.web.filter.session.NoSessionCreationFilter perms(许可验证)
-		 * org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter port（端口验证）
-		 * org.apache.shiro.web.filter.authz.PortFilter rest (rest方面)
-		 * org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter roles（权限验证）
-		 * org.apache.shiro.web.filter.authz.RolesAuthorizationFilter ssl （ssl方面）
-		 * org.apache.shiro.web.filter.authz.SslFilter member （用户方面）
-		 * org.apache.shiro.web.filter.authc.UserFilter user
-		 * 表示用户不一定已通过认证,只要曾被Shiro记住过登录状态的用户就可以正常发起请求,比如rememberMe
-		 */
-
-		// <!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
-		// <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
-		// filterChainDefinitionMap.put("/**/login", "anon");
-		// filterChainDefinitionMap.put("/**/logout", "logout");
-		// filterChainDefinitionMap.put("/**/reg", "anon");
-		// 配置记住我或认证通过可以访问的地址
 		filterChainDefinitionMap.put("/admin/**", "admin");
 		filterChainDefinitionMap.put("/login*", "anon");
-		filterChainDefinitionMap.put("/index*", "anon");
-
-		// 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-		// 登录成功后要跳转的链接
-		// shiroFilterFactoryBean.setSuccessUrl("/member/index");
-		// 未授权界面;
-		shiroFilterFactoryBean.setUnauthorizedUrl("/index");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 		return shiroFilterFactoryBean;
 	}

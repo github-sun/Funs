@@ -1,6 +1,7 @@
 package org.sun.admin.shiro;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -17,6 +18,7 @@ import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.sun.admin.contacts.Contacts;
 import org.sun.admin.service.AdminService;
 import org.sun.admin.service.PermissionService;
 import org.sun.admin.service.RolePermissionService;
@@ -55,7 +57,9 @@ public class AdminShiroRealm extends AuthorizingRealm {
 		if (admin.getState() == 1) {
 			throw new LockedAccountException();
 		}
-		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(admin, admin.getPassword(),
+		
+		String authz = Contacts.AUTHZ + username;
+		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(authz, admin.getPassword(),
 				new MSimpleByteSource(admin.getSalt().getBytes()), admin.getUsername());
 		return authenticationInfo;
 	}
@@ -86,6 +90,7 @@ public class AdminShiroRealm extends AuthorizingRealm {
 	 */
 	public void clearCachedAuthorizationInfo() {
 		PrincipalCollection principalCollection = SecurityUtils.getSubject().getPrincipals();
+		logger.info("===clearCachedAuthorizationInfo()　getName　"+principalCollection);
 		SimplePrincipalCollection principals = new SimplePrincipalCollection(principalCollection, getName());
 		super.clearCachedAuthorizationInfo(principals);
 	}
@@ -93,8 +98,12 @@ public class AdminShiroRealm extends AuthorizingRealm {
 	/**
 	 * 指定principalCollection 清除
 	 */
-	public void clearCachedAuthorizationInfo(PrincipalCollection principalCollection) {
-		SimplePrincipalCollection principals = new SimplePrincipalCollection(principalCollection, getName());
+	public void clearCachedAuthorizationInfo(List<String> usernameList) {
+		String name = getName();
+		SimplePrincipalCollection principals = new SimplePrincipalCollection();
+		for (String string : usernameList) {
+			principals.add(string, name);
+		}
 		super.clearCachedAuthorizationInfo(principals);
 	}
 }

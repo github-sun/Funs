@@ -109,6 +109,8 @@ public class RedisShiroCache<K, V> implements Cache<K, V> {
     }
 
     private K getCacheKey(Object k) {
-        return (K) (this.cacheKey + k);
+        K key = (K) (this.cacheKey + k);
+        logger.info("===getCacheKey key "+key);
+        return key;
     }
 }

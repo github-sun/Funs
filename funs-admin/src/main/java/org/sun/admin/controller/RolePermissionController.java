@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.sun.admin.service.RolePermissionService;
+import org.sun.admin.util.AuthorizationUtils;
 import org.sun.admin.util.ResponseResultUtils;
 import org.sun.model.RolePermission;
 import org.sun.model.bo.RolePermissionBO;
@@ -60,7 +61,11 @@ public class RolePermissionController {
 		if (null != rolePermission) {
 			return ResponseResultUtils.failed();
 		}
-		return rolePermissionService.addRolePermission(model) > 0 ? ResponseResultUtils.success() : ResponseResultUtils.failed();
+		ResponseResult result = rolePermissionService.addRolePermission(model) > 0 ? ResponseResultUtils.success() : ResponseResultUtils.failed();
+		List<String> authz = rolePermissionService.getUserAuthzByPermission(model.getRoleId(), model.getPermissionId());
+		logger.info("===addRolePermission　authz " + authz);
+		AuthorizationUtils.clearCachedAuthorizationInfo(authz);
+		return result;
 	}
 
 	@RequiresPermissions("rolepermission:remove.id")
@@ -68,7 +73,11 @@ public class RolePermissionController {
 	public ResponseResult removeRolePermission(@PathVariable("roleId") Integer roleId,
 			@PathVariable("permissionId") Integer permissionId) {
 		logger.info("===removeRolePermission　roleId " + roleId + " permissionId " + permissionId);
-		return rolePermissionService.removeRolePermissionById(roleId, permissionId) > 0 ? ResponseResultUtils.success() : ResponseResultUtils.failed();
+		List<String> authz = rolePermissionService.getUserAuthzByPermission(roleId, permissionId);
+		ResponseResult result = rolePermissionService.removeRolePermissionById(roleId, permissionId) > 0 ? ResponseResultUtils.success() : ResponseResultUtils.failed();
+		logger.info("===removeRolePermission　authz " + authz);
+		AuthorizationUtils.clearCachedAuthorizationInfo(authz);
+		return result;
 	}
 
 	@RequiresPermissions("rolepermission:update")
