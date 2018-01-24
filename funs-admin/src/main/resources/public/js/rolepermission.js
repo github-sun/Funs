@@ -6,11 +6,11 @@
 		               withCredentials: true
 		            },
 		   success: function(data) {
-			   if (data == 2) {
+			   if (data["code"] == 100001) {
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
-			jQuery.each(data, function(i, val) {
+			jQuery.each(data["data"], function(i, val) {
 				 var strHTML = "<tr><td>" + val.roleId + "</td><td>" + val.permissionId + "</td><td>"+val.rolename+"</td><td>"+val.permissionname+"</td><td>"+val.permissioncode+"</td><td><a onclick='deleteRolePermissionSubmit("+val.roleId+","+val.permissionId+")' href='#'>删除</a></td></tr>";
                  $('table#tblUser tbody').append(strHTML);
 			});  
@@ -35,11 +35,11 @@
 		               withCredentials: true
 		            },
 		   success: function(data) {
-			   if (data == 2) {
+			   if (data["code"] == 100001) {
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
-				jQuery.each(data, function(i, val) {
+				jQuery.each(data["data"], function(i, val) {
 					selector_username.append('<option value="'+val.id+'">'+val.rolename+'</option>');  
 				});  
 		   },
@@ -58,7 +58,7 @@
 		               withCredentials: true
 		            },
 		   success: function(data) {
-				jQuery.each(data, function(i, val) {
+				jQuery.each(data["data"], function(i, val) {
 					selector_rolename.append('<option value="'+val.id+'">'+val.name+'</option>');  
 				});  
 		   },
@@ -81,11 +81,11 @@
 		               withCredentials: true
 		            },
 		   success: function(data) {
-			   if (data == 2) {
+			   if (data["code"] == 100001) {
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
-				jQuery.each(data, function(i, val) {
+				jQuery.each(data["data"], function(i, val) {
 					if (admin_id == val.id) {
 						selector_username.append('<option value="'+val.id+'" selected=true>'+val.username+'</option>');
 					} else {
@@ -109,7 +109,7 @@
 		               withCredentials: true
 		            },
 		   success: function(data) {
-				jQuery.each(data, function(i, val) {
+				jQuery.each(data["data"], function(i, val) {
 					if (role_id == val.id) {
 						selector_rolename.append('<option value="'+val.id+'" selected=true>'+val.rolename+'</option>');
 					} else {
@@ -146,12 +146,12 @@
                    contentType:"application/json",     
                    data: JSON.stringify(data), 
 		   success: function(result) {
-			   if (result == 2) {
+			   if (data["code"] == 100001) {
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
-			   if (result == 0) {
-				   alert("对照关系已存在!");
+			   if (data["code"] == 100004) {
+				   alert(data["msg"]);
 				   return;
 			   }
 			$(window).attr('location','./rolepermission.html');
@@ -175,7 +175,7 @@
 		   url: 'http://localhost:8080/admin/rolepermission/'+roleId + "/"+permissionId,
 
 		   success: function(data) {
-			   if (data == 2) {
+			   if (data["code"] == 100001) {
 				   $(window).attr('location','./login.html');
 				   return;
 			   }

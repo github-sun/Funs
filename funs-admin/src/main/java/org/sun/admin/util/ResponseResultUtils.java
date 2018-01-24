@@ -10,6 +10,13 @@ import org.sun.model.vo.ResponseResult;
  */
 public class ResponseResultUtils {
 
+	public static ResponseResult success() {
+		ResponseResult result = new ResponseResult();
+		result.setCode(ResponseResultCode.SUCCESS.getCode());
+		result.setMsg(ResponseResultCode.SUCCESS.getMsg());
+		return result;
+	}
+	
 	public static ResponseResult success(Object data) {
 		ResponseResult result = new ResponseResult();
 		result.setCode(ResponseResultCode.SUCCESS.getCode());
@@ -30,6 +37,15 @@ public class ResponseResultUtils {
 		ResponseResult result = new ResponseResult();
 		result.setCode(resultCode.getCode());
 		result.setMsg(resultCode.getMsg());
+		result.setData("");
+		return result;
+	}
+	
+	public static ResponseResult failed() {
+		ResponseResult result = new ResponseResult();
+		result.setCode(ResponseResultCode.FAILED.getCode());
+		result.setMsg(ResponseResultCode.FAILED.getMsg());
+		result.setData("");
 		return result;
 	}
 }

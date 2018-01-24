@@ -6,14 +6,16 @@
                withCredentials: true
             },
 		   success: function(data) {
-			   if (data == 2) {
-				   $(window).attr('location','./login.html');
-				   return;
-			   }
-			jQuery.each(data, function(i, val) {
-			      var strHTML = "<tr><td>" + val.id + "</td><td>" + val.username + "</td><td>"+val.password+"</td><td>"+val.state+"</td><td>"+val.salt+"</td><td>"+val.createDate+"</td><td>"+val.updateDate+"</td><td><a onclick='updateAdmin("+val.id+")' href='#'>修改</a>　|　<a onclick='deleteAdminSubmit("+val.id+")' href='#'>删除</a></td></tr>";
-                        $('table#tblUser tbody').append(strHTML);
-			});  
+			      if (data["code"] == 100001) {
+			    	  $(window).attr('location','./login.html');
+					   return;
+			      }
+			      if (data["code"] == 000000) {
+						jQuery.each(data["data"], function(i, val) {
+						      var strHTML = "<tr><td>" + val.id + "</td><td>" + val.username + "</td><td>"+val.password+"</td><td>"+val.state+"</td><td>"+val.salt+"</td><td>"+val.createDate+"</td><td>"+val.updateDate+"</td><td><a onclick='updateAdmin("+val.id+")' href='#'>修改</a>　|　<a onclick='deleteAdminSubmit("+val.id+")' href='#'>删除</a></td></tr>";
+			                        $('table#tblUser tbody').append(strHTML);
+						});    
+			      }
 		   },
 		   statusCode: {
                    
@@ -45,11 +47,11 @@
                    contentType:"application/json",     
                    data: JSON.stringify(data), 
 		   success: function(data) {
-			   if (data == 2) {
+			   if (data["code"] == 100001) {
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
-			$(window).attr('location','./admin.html');
+			   $(window).attr('location','./admin.html');
 		   },
 		   statusCode: {
                    
@@ -69,7 +71,7 @@
                withCredentials: true
             },
 		   success: function(data) {
-			   if (data == 2) {
+			   if (data["code"] == 100001) {
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
@@ -96,13 +98,13 @@
                withCredentials: true
             },
 		   success: function(data) {
-			   if (data == 2) {
+			   if (data["code"] == 100001) {
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
-                        $('#item_id').val(data.id);
-                        $('#item_username').val(data.username);
-                        $('#item_password').val(data.password);
+                        $('#item_id').val(data["data"].id);
+                        $('#item_username').val(data["data"].username);
+                        $('#item_password').val(data["data"].password);
 		   },
 		   statusCode: {
                    
@@ -133,7 +135,7 @@
 	            contentType:"application/json",     
 	            data: JSON.stringify(data), 
 		   success: function(data) {
-			   if (data == 2) {
+			   if (data["code"] == 100001) {
 				   $(window).attr('location','./login.html');
 				   return;
 			   }

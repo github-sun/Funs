@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.sun.admin.service.RolePermissionService;
+import org.sun.admin.util.ResponseResultUtils;
 import org.sun.model.RolePermission;
 import org.sun.model.bo.RolePermissionBO;
+import org.sun.model.vo.ResponseResult;
 
 /**
  * @author sun
@@ -43,41 +45,41 @@ public class RolePermissionController {
 
 	@RequiresPermissions("rolepermission:list.all")
 	@GetMapping("/rolepermission")
-	public List<RolePermissionBO> getRolePermissionDatas() {
+	public ResponseResult getRolePermissionDatas() {
 		List<RolePermissionBO> list = rolePermissionService.getRolePermissionDatas();
 		logger.info("===getRolePermissionDatas " + list);
-		return list;
+		return ResponseResultUtils.success(list);
 	}
 
 	@RequiresPermissions("rolepermission:add")
 	@PostMapping("/rolepermission")
-	public int addRolePermission(@RequestBody RolePermission model) {
+	public ResponseResult addRolePermission(@RequestBody RolePermission model) {
 		RolePermission rolePermission = rolePermissionService.getRolePermissionById(model.getRoleId(),
 				model.getPermissionId());
 		logger.info("===addRolePermission　" + model.toString() + " rolePermission " + rolePermission);
-		if (null == rolePermission) {
-			return rolePermissionService.addRolePermission(model);
+		if (null != rolePermission) {
+			return ResponseResultUtils.failed();
 		}
-		return 0;
+		return rolePermissionService.addRolePermission(model) > 0 ? ResponseResultUtils.success() : ResponseResultUtils.failed();
 	}
 
 	@RequiresPermissions("rolepermission:remove.id")
 	@DeleteMapping("/rolepermission/{roleId}/{permissionId}")
-	public int removeRolePermission(@PathVariable("roleId") Integer roleId,
+	public ResponseResult removeRolePermission(@PathVariable("roleId") Integer roleId,
 			@PathVariable("permissionId") Integer permissionId) {
 		logger.info("===removeRolePermission　roleId " + roleId + " permissionId " + permissionId);
-		return rolePermissionService.removeRolePermissionById(roleId, permissionId);
+		return rolePermissionService.removeRolePermissionById(roleId, permissionId) > 0 ? ResponseResultUtils.success() : ResponseResultUtils.failed();
 	}
 
 	@RequiresPermissions("rolepermission:update")
 	@PutMapping("/rolepermission")
-	public int updateRolePermission(@RequestBody RolePermission model) {
+	public ResponseResult updateRolePermission(@RequestBody RolePermission model) {
 		RolePermission rolePermission = rolePermissionService.getRolePermissionById(model.getRoleId(),
 				model.getPermissionId());
 		logger.info("===updateRolePermission　" + model.toString() + " rolePermission " + rolePermission);
-		if (null == rolePermission) {
-			return rolePermissionService.updateRolePermission(model);
+		if (null != rolePermission) {
+			return ResponseResultUtils.failed();
 		}
-		return 0;
+		return rolePermissionService.updateRolePermission(model) > 0 ? ResponseResultUtils.success() : ResponseResultUtils.failed();
 	}
 }

@@ -38,4 +38,10 @@ public class ResponseResult{
 	public void setData(Object data) {
 		this.data = data;
 	}
+
+	@Override
+	public String toString() {
+		return "ResponseResult [code=" + code + ", msg=" + msg + ", data=" + data + "]";
+	}
+	
 }

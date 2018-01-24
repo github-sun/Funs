@@ -7,6 +7,11 @@ import javax.servlet.ServletResponse;
 
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.springframework.http.MediaType;
+import org.sun.admin.enums.ResponseResultCode;
+import org.sun.admin.util.ResponseResultUtils;
+import org.sun.model.vo.ResponseResult;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author sun
@@ -29,7 +34,9 @@ public class AdminFormAuthenticationFilter extends FormAuthenticationFilter {
 			// ,返回json数据
 			response.setCharacterEncoding("UTF-8"); // 避免乱码
 			try { 
-				response.getWriter().write("2");
+				ResponseResult result = ResponseResultUtils.warn(ResponseResultCode.AUTH_NOT);
+				ObjectMapper mapper = new ObjectMapper();  
+				response.getWriter().write(mapper.writeValueAsString(result));
 			} catch (IOException e) {
 				System.out.println("===onAccessDenied IOException " + e.getMessage());
 				e.printStackTrace();

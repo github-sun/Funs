@@ -13,30 +13,44 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
+import org.sun.admin.enums.ResponseResultCode;
+import org.sun.admin.util.ResponseResultUtils;
+import org.sun.model.vo.ResponseResult;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
-* @author sun 
-* @date Jan 23, 2018 4:37:23 PM
-* 
-*/
+ * @author sun
+ * @date Jan 23, 2018 4:37:23 PM
+ * 
+ */
 @ControllerAdvice
 @ResponseBody
 public class ExceptionHandlerAdvice implements ResponseBodyAdvice {
 
-    private ThreadLocal<Object> modelHolder = new ThreadLocal<>();
+	private ThreadLocal<Object> modelHolder = new ThreadLocal<>();
 
-    private Logger logger = LoggerFactory.getLogger(ExceptionHandlerAdvice.class);
+	private Logger logger = LoggerFactory.getLogger(ExceptionHandlerAdvice.class);
 
-    @ExceptionHandler(AuthorizationException.class)
-    public int handleAuthorizationException(AuthorizationException e) {
-       return 3;
-    }
+	@ExceptionHandler(AuthorizationException.class)
+	public String handleAuthorizationException(AuthorizationException e) {
+		ResponseResult result = ResponseResultUtils.warn(ResponseResultCode.PERMISSION_NOT);
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			return mapper.writeValueAsString(result);
+		} catch (JsonProcessingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return "JsonProcessingException";
+	}
 
-    @InitBinder
-    public void initBinder(WebDataBinder webDataBinder) {
-        modelHolder.set(webDataBinder.getTarget());
-    }
-    
+	@InitBinder
+	public void initBinder(WebDataBinder webDataBinder) {
+		modelHolder.set(webDataBinder.getTarget());
+	}
+
 	@Override
 	public boolean supports(MethodParameter returnType, Class converterType) {
 		return true;

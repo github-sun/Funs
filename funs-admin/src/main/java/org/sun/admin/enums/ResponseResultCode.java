@@ -6,10 +6,12 @@ package org.sun.admin.enums;
 */
 public enum ResponseResultCode {
 	
-	SUCCESS(0, "请求成功"),
-    WEAK_NET_WORK(-1, "网络异常，请稍后重试"),
-    AUTH_NOT(2, "没有认证"),
-    PERMISSION_NOT(3, "无权限");
+	SUCCESS(000000, "请求成功"),
+    WEAK_NET_WORK(100000, "网络异常，请稍后重试"),
+    AUTH_NOT(100001, "没有认证"),
+    PERMISSION_NOT(100002, "无权限"),
+	FAILED(100003, "请求失败"),
+	ADMIN_ROLE_EXIST(100004, "无对照关系已存在!");
 	
 	private int code;
     private String msg;
@@ -26,5 +28,13 @@ public enum ResponseResultCode {
     public String getMsg() {
         return msg;
     }
+
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
 
 }

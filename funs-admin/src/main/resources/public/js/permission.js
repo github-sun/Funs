@@ -6,11 +6,11 @@
                withCredentials: true
             },
 		   success: function(data) {
-			   if (data == 2) {
+			   if (data["code"] == 100001) {
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
-			jQuery.each(data, function(i, val) {
+			jQuery.each(data["data"], function(i, val) {
 			      var strHTML = "<tr><td>" + val.id + "</td><td>" + val.name + "</td><td>"+val.code+"</td><td>"+val.createDate+"</td><td>"+val.updateDate+"</td><td><a onclick='updatePermission("+val.id+")' href='#'>修改</a>　|　<a onclick='deletePermissionSubmit("+val.id+")' href='#'>删除</a></td></tr>";
                         $('table#tblUser tbody').append(strHTML);
 			});  
@@ -45,7 +45,7 @@
                    contentType:"application/json",     
                    data: JSON.stringify(data), 
 		   success: function(data) {
-			   if (data == 2) {
+			   if (data["code"] == 100001) {
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
@@ -69,7 +69,7 @@
                withCredentials: true
             },
 		   success: function(data) {
-			   if (data == 2) {
+			   if (data["code"] == 100001) {
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
@@ -96,13 +96,13 @@
                withCredentials: true
             },
 		   success: function(data) {
-			   if (data == 2) {
+			   if (data["code"] == 100001) {
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
-                        $('#item_id').val(data.id);
-                        $('#item_name').val(data.name);
-                        $('#item_code').val(data.code);
+                        $('#item_id').val(data["data"].id);
+                        $('#item_name').val(data["data"].name);
+                        $('#item_code').val(data["data"].code);
 		   },
 		   statusCode: {
                    
@@ -133,7 +133,7 @@
 	            contentType:"application/json",     
 	            data: JSON.stringify(data), 
 		   success: function(data) {
-			   if (data == 2) {
+			   if (data["code"] == 100001) {
 				   $(window).attr('location','./login.html');
 				   return;
 			   }

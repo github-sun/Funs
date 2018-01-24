@@ -21,7 +21,7 @@ import org.sun.model.Admin;
 @Mapper
 public interface AdminDAO {
 	
-	@Select("SELECT ID as id,USER_NAME as username, PASSWORD as password, STATE as state, SALT as salt, IS_SUPER as isSuper, CREATE_DATE as createDate, UPDATE_DATE as updateDate FROM ADMIN WHERE USER_NAME = #{username} and IS_SUPER=0")
+	@Select("SELECT ID as id,USER_NAME as username, PASSWORD as password, STATE as state, SALT as salt, IS_SUPER as isSuper, CREATE_DATE as createDate, UPDATE_DATE as updateDate FROM ADMIN WHERE USER_NAME = #{username}")
 	Admin queryByUsername(@Param("username") String username);
 	
 	@Select("SELECT ID as id,USER_NAME as username, PASSWORD as password, STATE as state, SALT as salt, IS_SUPER as isSuper, CREATE_DATE as createDate, UPDATE_DATE as updateDate FROM ADMIN WHERE ID = #{id} and IS_SUPER=0")

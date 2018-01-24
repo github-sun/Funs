@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.sun.admin.service.AdminRoleService;
+import org.sun.admin.util.ResponseResultUtils;
 import org.sun.model.AdminRole;
 import org.sun.model.bo.AdminRoleBO;
+import org.sun.model.vo.ResponseResult;
 
 /**
 * @author sun 
@@ -42,38 +44,38 @@ public class AdminRoleController {
 	
 	@RequiresPermissions("adminrole:list.all")
 	@GetMapping("/adminrole")
-	public List<AdminRoleBO> getAdminRoleDatas() {
+	public ResponseResult getAdminRoleDatas() {
 		List<AdminRoleBO> list = adminRoleService.getAdminRoleDatas();
 		logger.info("===getAdminRoleDatas "+list);
-		return list;
+		return ResponseResultUtils.success(list);
 	}
 	
 	@RequiresPermissions("adminrole:add")
 	@PostMapping("/adminrole")
-	public int addAdminRole(@RequestBody AdminRole model) {
+	public ResponseResult addAdminRole(@RequestBody AdminRole model) {
 		AdminRole adminRole = adminRoleService.getAdminRoleById(model.getAdminId(), model.getRoleId());
 		logger.info("===addAdminRole　"+model.toString() + " adminRole " +adminRole);
-		if (null == adminRole) {
-			return adminRoleService.addAdminRole(model);
+		if (null != adminRole) {
+			return ResponseResultUtils.failed();
 		}
-		return 0;
+		return adminRoleService.addAdminRole(model) > 0 ? ResponseResultUtils.success() : ResponseResultUtils.failed();
 	}
 	
 	@RequiresPermissions("adminrole:remove.id")
 	@DeleteMapping("/adminrole/{admin_id}/{role_id}")
-	public int removeAdminRole(@PathVariable("admin_id") Integer adminId,@PathVariable("role_id") Integer roleId) {
+	public ResponseResult removeAdminRole(@PathVariable("admin_id") Integer adminId,@PathVariable("role_id") Integer roleId) {
 		logger.info("===removeAdminRole　admin_id "+adminId + " role_id "+roleId);
-		return adminRoleService.removeAdminRoleById(adminId, roleId);
+		return adminRoleService.removeAdminRoleById(adminId, roleId) > 0 ? ResponseResultUtils.success() : ResponseResultUtils.failed();
 	}
 	
 	@RequiresPermissions("adminrole:update")
 	@PutMapping("/adminrole")
-	public int updateAdminRole(@RequestBody AdminRole model) {
+	public ResponseResult updateAdminRole(@RequestBody AdminRole model) {
 		AdminRole adminRole = adminRoleService.getAdminRoleById(model.getAdminId(), model.getRoleId());
 		logger.info("===updateAdminRole　"+model.toString() + " adminRole " +adminRole);
-		if (null == adminRole) {
-			return adminRoleService.updateAdminRole(model);
+		if (null != adminRole) {
+			return ResponseResultUtils.failed();
 		}
-		return 0;
+		return adminRoleService.updateAdminRole(model) > 0 ? ResponseResultUtils.success() : ResponseResultUtils.failed();
 	}
 }

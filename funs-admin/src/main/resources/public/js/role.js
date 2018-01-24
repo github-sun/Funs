@@ -6,11 +6,11 @@
 	               withCredentials: true
 	            },
 		   success: function(data) {
-			   if (data == 2) {
+			   if (data["code"] == 100001) {
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
-			jQuery.each(data, function(i, val) {
+			jQuery.each(data["data"], function(i, val) {
 			      var strHTML = "<tr><td>" + val.id + "</td><td>" + val.rolename + "</td><td>"+val.createDate+"</td><td>"+val.updateDate+"</td><td><a onclick='updateRole("+val.id+")' href='#'>修改</a>　|　<a onclick='deleteRoleSubmit("+val.id+")' href='#'>删除</a></td></tr>";
                         $('table#tblUser tbody').append(strHTML);
 			});  
@@ -39,7 +39,7 @@
                    contentType:"application/json",     
                    data: JSON.stringify(data), 
 		   success: function(data) {
-			   if (data == 2) {
+			   if (data["code"] == 100001) {
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
@@ -63,7 +63,7 @@
 		               withCredentials: true
 		            },
 		   success: function(data) {
-			   if (data == 2) {
+			   if (data["code"] == 100001) {
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
@@ -90,12 +90,12 @@
 		               withCredentials: true
 		            },
 		   success: function(data) {
-			   if (data == 2) {
+			   if (data["code"] == 100001) {
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
-                        $('#item_id').val(data.id);
-                        $('#item_rolename').val(data.rolename);
+                        $('#item_id').val(data["data"].id);
+                        $('#item_rolename').val(data["data"].rolename);
 		   },
 		   statusCode: {
                    
@@ -122,7 +122,7 @@
 	            contentType:"application/json",     
 	            data: JSON.stringify(data), 
 		   success: function(data) {
-			   if (data == 2) {
+			   if (data["code"] == 100001) {
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
