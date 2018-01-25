@@ -23,12 +23,7 @@ public class AdminFormAuthenticationFilter extends FormAuthenticationFilter {
 	@Override
 	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
 		if (isLoginRequest(request, response)) {
-			if (isLoginSubmission(request, response)) {
-				return executeLogin(request, response);
-			} else {
-				// allow them to see the login page ;)
-				return true;
-			}
+			return true;
 		} else {
 			response.setContentType(MediaType.APPLICATION_JSON_VALUE); // 设置ContentType
 			// ,返回json数据
