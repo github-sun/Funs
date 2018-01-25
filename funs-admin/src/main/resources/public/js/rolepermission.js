@@ -10,6 +10,10 @@
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
+			      if (data["code"] == 100002) {
+			    	  alert(data["msg"]);
+					   return;
+			      }
 			jQuery.each(data["data"], function(i, val) {
 				 var strHTML = "<tr><td>" + val.roleId + "</td><td>" + val.permissionId + "</td><td>"+val.rolename+"</td><td>"+val.permissionname+"</td><td>"+val.permissioncode+"</td><td><a onclick='deleteRolePermissionSubmit("+val.roleId+","+val.permissionId+")' href='#'>删除</a></td></tr>";
                  $('table#tblUser tbody').append(strHTML);
@@ -39,6 +43,10 @@
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
+			      if (data["code"] == 100002) {
+			    	  alert(data["msg"]);
+					   return;
+			      }
 				jQuery.each(data["data"], function(i, val) {
 					selector_username.append('<option value="'+val.id+'">'+val.rolename+'</option>');  
 				});  
@@ -85,6 +93,10 @@
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
+			      if (data["code"] == 100002) {
+			    	  alert(data["msg"]);
+					   return;
+			      }
 				jQuery.each(data["data"], function(i, val) {
 					if (admin_id == val.id) {
 						selector_username.append('<option value="'+val.id+'" selected=true>'+val.username+'</option>');
@@ -150,6 +162,10 @@
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
+			      if (data["code"] == 100002) {
+			    	  alert(data["msg"]);
+					   return;
+			      }
 			   if (data["code"] == 100004) {
 				   alert(data["msg"]);
 				   return;
@@ -179,6 +195,10 @@
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
+			      if (data["code"] == 100002) {
+			    	  alert(data["msg"]);
+					   return;
+			      }
 			$(window).attr('location','./rolepermission.html');
 		   },
 		   statusCode: {

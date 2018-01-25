@@ -11,8 +11,8 @@ public enum ResponseResultCode {
     AUTH_NOT(100001, "没有认证"),
     PERMISSION_NOT(100002, "无权限"),
 	FAILED(100003, "请求失败"),
-	ADMIN_ROLE_EXIST(100004, "无对照关系已存在!");
-	
+	ADMIN_ROLE_EXIST(100004, "无对照关系已存在!"),
+	UNKNOWN_ERROR(100005, "未知错误!");
 	private int code;
     private String msg;
 

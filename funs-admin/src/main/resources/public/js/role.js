@@ -10,6 +10,10 @@
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
+			      if (data["code"] == 100002) {
+			    	  alert(data["msg"]);
+					   return;
+			      }
 			jQuery.each(data["data"], function(i, val) {
 			      var strHTML = "<tr><td>" + val.id + "</td><td>" + val.rolename + "</td><td>"+val.createDate+"</td><td>"+val.updateDate+"</td><td><a onclick='updateRole("+val.id+")' href='#'>修改</a>　|　<a onclick='deleteRoleSubmit("+val.id+")' href='#'>删除</a></td></tr>";
                         $('table#tblUser tbody').append(strHTML);
@@ -43,6 +47,10 @@
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
+			      if (data["code"] == 100002) {
+			    	  alert(data["msg"]);
+					   return;
+			      }
 			$(window).attr('location','./role.html');
 		   },
 		   statusCode: {
@@ -67,6 +75,10 @@
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
+			      if (data["code"] == 100002) {
+			    	  alert(data["msg"]);
+					   return;
+			      }
 			$(window).attr('location','./role.html');
 		   },
 		   statusCode: {
@@ -94,6 +106,10 @@
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
+			      if (data["code"] == 100002) {
+			    	  alert(data["msg"]);
+					   return;
+			      }
                         $('#item_id').val(data["data"].id);
                         $('#item_rolename').val(data["data"].rolename);
 		   },
@@ -126,6 +142,10 @@
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
+			      if (data["code"] == 100002) {
+			    	  alert(data["msg"]);
+					   return;
+			      }
 			$(window).attr('location','./role.html');
 		   },
 		   statusCode: {

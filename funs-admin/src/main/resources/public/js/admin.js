@@ -10,6 +10,10 @@
 			    	  $(window).attr('location','./login.html');
 					   return;
 			      }
+			      if (data["code"] == 100002) {
+			    	  alert(data["msg"]);
+					   return;
+			      }
 			      if (data["code"] == 000000) {
 						jQuery.each(data["data"], function(i, val) {
 						      var strHTML = "<tr><td>" + val.id + "</td><td>" + val.username + "</td><td>"+val.password+"</td><td>"+val.state+"</td><td>"+val.salt+"</td><td>"+val.createDate+"</td><td>"+val.updateDate+"</td><td><a onclick='updateAdmin("+val.id+")' href='#'>修改</a>　|　<a onclick='deleteAdminSubmit("+val.id+")' href='#'>删除</a></td></tr>";
@@ -51,6 +55,10 @@
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
+			      if (data["code"] == 100002) {
+			    	  alert(data["msg"]);
+					   return;
+			      }
 			   $(window).attr('location','./admin.html');
 		   },
 		   statusCode: {
@@ -75,6 +83,10 @@
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
+			      if (data["code"] == 100002) {
+			    	  alert(data["msg"]);
+					   return;
+			      }
 			$(window).attr('location','./admin.html');
 		   },
 		   statusCode: {
@@ -102,6 +114,10 @@
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
+			      if (data["code"] == 100002) {
+			    	  alert(data["msg"]);
+					   return;
+			      }
                         $('#item_id').val(data["data"].id);
                         $('#item_username').val(data["data"].username);
                         $('#item_password').val(data["data"].password);
@@ -139,6 +155,10 @@
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
+			      if (data["code"] == 100002) {
+			    	  alert(data["msg"]);
+					   return;
+			      }
 			$(window).attr('location','./admin.html');
 		   },
 		   statusCode: {

@@ -10,6 +10,10 @@
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
+		      if (data["code"] == 100002) {
+		    	  alert(data["msg"]);
+				   return;
+		      }
 			jQuery.each(data["data"], function(i, val) {
 				 var strHTML = "<tr><td>" + val.adminId + "</td><td>" + val.roleId + "</td><td>"+val.username+"</td><td>"+val.rolename+"</td><td><a onclick='deleteAdminRoleSubmit("+val.adminId+","+val.roleId+")' href='#'>删除</a></td></tr>";
                  $('table#tblUser tbody').append(strHTML);
@@ -39,6 +43,10 @@
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
+			      if (data["code"] == 100002) {
+			    	  alert(data["msg"]);
+					   return;
+			      }
 				jQuery.each(data["data"], function(i, val) {
 					selector_username.append('<option value="'+val.id+'">'+val.username+'</option>');  
 				});  
@@ -85,6 +93,10 @@
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
+			      if (data["code"] == 100002) {
+			    	  alert(data["msg"]);
+					   return;
+			      }
 				jQuery.each(data["data"], function(i, val) {
 					if (admin_id == val.id) {
 						selector_username.append('<option value="'+val.id+'" selected=true>'+val.username+'</option>');
@@ -150,6 +162,10 @@
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
+			      if (data["code"] == 100002) {
+			    	  alert(data["msg"]);
+					   return;
+			      }
 			   if (data["code"] == 100004) {
 				   alert(data["msg"]);
 				   return;
@@ -179,6 +195,10 @@
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
+			      if (data["code"] == 100002) {
+			    	  alert(data["msg"]);
+					   return;
+			      }
 			$(window).attr('location','./adminrole.html');
 		   },
 		   statusCode: {
@@ -206,6 +226,10 @@
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
+			      if (data["code"] == 100002) {
+			    	  alert(data["msg"]);
+					   return;
+			      }
                         $('#item_id').val(data["data"].id);
                         $('#item_rolename').val(data["data"].rolename);
 		   },
@@ -241,6 +265,10 @@
 				   $(window).attr('location','./login.html');
 				   return;
 			   }
+			      if (data["code"] == 100002) {
+			    	  alert(data["msg"]);
+					   return;
+			      }
 			   if (data["code"] == 100004) {
 				   alert(data["msg"]);
 				   return;
