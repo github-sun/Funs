@@ -88,9 +88,9 @@ public class ShiroConfig {
 		sessionListeners.add(customSessionListener());
 		sessionManager.setSessionListeners(sessionListeners);
 		// 单位为毫秒（1秒=1000毫秒） 3600000毫秒为1个小时
-		sessionManager.setSessionValidationInterval(30*1000);
+		sessionManager.setSessionValidationInterval(30 * 60 * 1000);
 		// 3600000 milliseconds = 1 hour
-		sessionManager.setGlobalSessionTimeout(30 * 1000);
+		sessionManager.setGlobalSessionTimeout(30 * 60 * 1000);
 		// 是否删除无效的，默认也是开启
 		sessionManager.setDeleteInvalidSessions(true);
 		// 是否开启 检测，默认开启

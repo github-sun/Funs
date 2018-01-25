@@ -86,17 +86,37 @@ public class AdminShiroRealm extends AuthorizingRealm {
 	}
 
 	/**
-	 * 清空当前用户权限信息
+	 * 清空当前用户认证缓存信息
+	 */
+	public void clearCachedAuthenticationInfo() {
+		PrincipalCollection principalCollection = SecurityUtils.getSubject().getPrincipals();
+		SimplePrincipalCollection principals = new SimplePrincipalCollection(principalCollection, getName());
+		super.clearCachedAuthenticationInfo(principals);
+	}
+	
+	/**
+	 * 通过用户列表清除认证缓存信息
+	 */
+	public void clearCachedAuthenticationInfo(List<String> usernameList) {
+		String name = getName();
+		SimplePrincipalCollection principals = new SimplePrincipalCollection();
+		for (String string : usernameList) {
+			principals.add(string, name);
+		}
+		super.clearCachedAuthenticationInfo(principals);
+	}
+	
+	/**
+	 * 清空当前用户权限缓存信息
 	 */
 	public void clearCachedAuthorizationInfo() {
 		PrincipalCollection principalCollection = SecurityUtils.getSubject().getPrincipals();
-		logger.info("===clearCachedAuthorizationInfo()　getName　"+principalCollection);
 		SimplePrincipalCollection principals = new SimplePrincipalCollection(principalCollection, getName());
 		super.clearCachedAuthorizationInfo(principals);
 	}
 
 	/**
-	 * 指定principalCollection 清除
+	 * 通过用户列表清除权限信息
 	 */
 	public void clearCachedAuthorizationInfo(List<String> usernameList) {
 		String name = getName();
@@ -105,5 +125,26 @@ public class AdminShiroRealm extends AuthorizingRealm {
 			principals.add(string, name);
 		}
 		super.clearCachedAuthorizationInfo(principals);
+	}
+	
+	/**
+	 * 清空当前用户的认证和权限缓存信息
+	 */
+	public void clearCache() {
+		PrincipalCollection principalCollection = SecurityUtils.getSubject().getPrincipals();
+		SimplePrincipalCollection principals = new SimplePrincipalCollection(principalCollection, getName());
+		super.clearCache(principals);
+	}
+	
+	/**
+	 * 通过用户列表清除认证和权限信息
+	 */
+	public void clearCache(List<String> usernameList) {
+		String name = getName();
+		SimplePrincipalCollection principals = new SimplePrincipalCollection();
+		for (String string : usernameList) {
+			principals.add(string, name);
+		}
+		super.clearCache(principals);
 	}
 }

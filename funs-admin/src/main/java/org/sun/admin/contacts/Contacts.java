@@ -7,4 +7,6 @@ package org.sun.admin.contacts;
 public class Contacts {
 
 	public static final String AUTHZ = "authz:";
+	
+	public static final String SESSION_SUBJECT = "session_subject";
 }

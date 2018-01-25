@@ -1,9 +1,12 @@
 package org.sun.admin.controller;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +38,9 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
+	@Autowired
+	private SessionDAO sessionDAO;
+	
 	@RequiresPermissions("admin:list.id")
 	@GetMapping("/admin/{id}")
 	public ResponseResult getAdminById(@PathVariable("id") Integer id) {
@@ -47,7 +53,8 @@ public class AdminController {
 	@GetMapping("/admin")
 	public ResponseResult getAdminDatas() {
 		List<Admin> list = adminService.getAdminDatas();
-		logger.info("===getAdminDatas "+list);
+		Collection<Session> sessions = sessionDAO.getActiveSessions();
+		logger.info("===getAdminDatas "+list + " sessions "+sessions);
 		return ResponseResultUtils.success(list);
 	}
 	

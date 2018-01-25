@@ -10,6 +10,7 @@ import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.BoundValueOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.sun.admin.config.RedisConfig;
 
@@ -44,7 +45,7 @@ public class RedisShiroCache<K, V> implements Cache<K, V> {
             if(key == null){
                 return null;
             }else {
-                redisTemplate.boundValueOps(getCacheKey(key)).expire(redisConfig.getCacheTime(), TimeUnit.MINUTES);
+                //redisTemplate.boundValueOps(getCacheKey(key)).expire(redisConfig.getCacheTime(), TimeUnit.MINUTES);
                 V v = redisTemplate.boundValueOps(getCacheKey(key)).get();
                 return v;
             }
@@ -58,7 +59,8 @@ public class RedisShiroCache<K, V> implements Cache<K, V> {
         logger.info("根据key从存储 key [" + key + "]");
         try {
             V v = get(key);
-            redisTemplate.boundValueOps(getCacheKey(key)).set(value);
+            BoundValueOperations<K, V> operations = redisTemplate.boundValueOps(getCacheKey(key));
+            operations.set(value, redisConfig.getCacheTime(), TimeUnit.MINUTES);
             System.out.println(redisTemplate.boundValueOps(getCacheKey(key)).get().toString());
             return v;
         }catch (Throwable t){

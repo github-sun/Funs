@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.sun.admin.contacts.Contacts;
 import org.sun.admin.shiro.AuthenticationToken;
 import org.sun.model.Admin;
 
@@ -37,6 +38,7 @@ public class LoginController {
 		AuthenticationToken token = new AuthenticationToken(model.getUsername(), model.getPassword(), true);
 		try {
 			subject.login(token);
+			subject.getSession().setAttribute(Contacts.SESSION_SUBJECT, model.getUsername());
 			result = 0;
 		} catch (Exception e) {
 			logger.error("===login token exception "+e);

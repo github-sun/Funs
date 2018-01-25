@@ -1,8 +1,11 @@
 package org.sun.admin.redis;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
@@ -15,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 import org.sun.admin.config.RedisConfig;
+import org.sun.admin.contacts.Contacts;
 
 /**
 * @author sun 
@@ -75,7 +79,15 @@ public class RedisSessionDAO extends AbstractSessionDAO {
 
     @Override
     public Collection<Session> getActiveSessions() {
-        logger.info("===activeSession");
-        return Collections.emptySet();
+    	Collection<Session> result = new ArrayList<>();
+    	Set<String> keys = redisTemplate.keys("session*");
+    	Iterator<String> iter = keys.iterator();
+    	while (iter.hasNext()) {
+    		String key = iter.next();
+    		Session session = (Session) redisTemplate.opsForValue().get(key);
+    		logger.info("===getActiveSessions session "+session.getAttribute(Contacts.SESSION_SUBJECT));
+    		result.add(session);
+    	}
+        return result;
     }
 }
