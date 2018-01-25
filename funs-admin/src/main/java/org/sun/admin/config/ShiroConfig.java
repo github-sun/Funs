@@ -32,8 +32,8 @@ import org.sun.admin.redis.RedisCacheManager;
 import org.sun.admin.redis.RedisSessionDAO;
 import org.sun.admin.shiro.AdminFormAuthenticationFilter;
 import org.sun.admin.shiro.AdminShiroRealm;
-import org.sun.admin.shiro.CustomModularRealmAuthenticator;
-import org.sun.admin.shiro.CustomSessionListener;
+import org.sun.admin.shiro.MModularRealmAuthenticator;
+import org.sun.admin.shiro.MSessionListener;
 
 /**
  * @author sun
@@ -73,9 +73,9 @@ public class ShiroConfig {
 	}
 	
     @Bean(name = "customSessionListener")
-    public CustomSessionListener customSessionListener(){
+    public MSessionListener customSessionListener(){
         logger.debug("===customSessionListener()");
-        return new CustomSessionListener();
+        return new MSessionListener();
     }
 
 	@Bean(name = "sessionManager")
@@ -129,7 +129,7 @@ public class ShiroConfig {
 		Collection<Realm> shiroAuthorizerRealms = new ArrayList<Realm>();
 		shiroAuthorizerRealms.add(adminShiroRealm());
 
-		CustomModularRealmAuthenticator customModularRealmAuthenticator = new CustomModularRealmAuthenticator();
+		MModularRealmAuthenticator customModularRealmAuthenticator = new MModularRealmAuthenticator();
 		customModularRealmAuthenticator.setDefinedRealms(shiroAuthenticatorRealms);
 		customModularRealmAuthenticator.setAuthenticationStrategy(authenticationStrategy());
 		securityManager.setAuthenticator(customModularRealmAuthenticator);

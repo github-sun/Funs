@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 * @date Jan 16, 2018 2:32:55 PM
 * 
 */
-public class CustomerAuthenticationToken extends UsernamePasswordToken {
+public class AuthenticationToken extends UsernamePasswordToken {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -23,7 +23,7 @@ public class CustomerAuthenticationToken extends UsernamePasswordToken {
      */
     private String loginForm;
 
-    public CustomerAuthenticationToken(String username, String password, boolean rememberMe) {
+    public AuthenticationToken(String username, String password, boolean rememberMe) {
         super(username, password, rememberMe);
     }
 

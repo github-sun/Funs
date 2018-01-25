@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  * @date Jan 16, 2018 2:32:55 PM
  * 
  */
-public class CustomModularRealmAuthenticator extends ModularRealmAuthenticator {
+public class MModularRealmAuthenticator extends ModularRealmAuthenticator {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 

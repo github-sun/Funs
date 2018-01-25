@@ -18,7 +18,7 @@ import org.sun.admin.config.RedisConfig;
 * 
 */
 @Configuration
-public class CustomSessionListener implements SessionListener {
+public class MSessionListener implements SessionListener {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
