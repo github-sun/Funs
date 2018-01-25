@@ -39,7 +39,9 @@
     <body>
 
         <div class="container-fluid">
-
+                  <div id="dvErrorMsg" class="alert alert-danger">
+                        <strong><span id="spnErrorMsg"></span></strong>
+                    </div>
             <div class="row content">
                 
 
@@ -75,6 +77,7 @@
         <script src="../js/role.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
+            	hideErrorMsg();
             	getRoleDatas();
                 $("#addRole").bind("click", function(){
                     $(window).attr('location','./role_add.html');

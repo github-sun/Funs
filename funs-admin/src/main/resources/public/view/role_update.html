@@ -38,7 +38,9 @@
     <body>
 
         <div class="container-fluid">
-
+                  <div id="dvErrorMsg" class="alert alert-danger">
+                        <strong><span id="spnErrorMsg"></span></strong>
+                    </div>
             <div class="row content">
                 
 
@@ -68,6 +70,7 @@
         <script type="text/javascript">
 
             $(document).ready(function(){
+            	hideErrorMsg();
 	  var thisURL = document.URL;    
 	  var  getval =thisURL.split('?')[1];  
 	  var showval= getval.split("=")[1]; 

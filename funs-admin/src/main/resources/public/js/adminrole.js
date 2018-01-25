@@ -1,4 +1,11 @@
-   var getAdminRoleDatas = function(){
+        var hideErrorMsg = function(){
+            $("#dvErrorMsg").hide();
+        };
+        var showErrorMsg = function(msg){
+        	$("#spnErrorMsg").html(msg);
+            $("#dvErrorMsg").show();
+        };   
+var getAdminRoleDatas = function(){
 		$.ajax({
                    type: "GET",
 				   url: 'http://localhost:8080/admin/adminrole',
@@ -6,18 +13,14 @@
 		               withCredentials: true
 		            },
 		   success: function(data) {
-			   if (data["code"] == 100001) {
-				   $(window).attr('location','./login.html');
-				   return;
-			   }
-		      if (data["code"] == 100002) {
-		    	  alert(data["msg"]);
-				   return;
+		      if (data["code"] == 000000) {
+					jQuery.each(data["data"], function(i, val) {
+						 var strHTML = "<tr><td>" + val.adminId + "</td><td>" + val.roleId + "</td><td>"+val.username+"</td><td>"+val.rolename+"</td><td><a onclick='deleteAdminRoleSubmit("+val.adminId+","+val.roleId+")' href='#'>删除</a></td></tr>";
+		                 $('table#tblUser tbody').append(strHTML);
+					});  
+					return;
 		      }
-			jQuery.each(data["data"], function(i, val) {
-				 var strHTML = "<tr><td>" + val.adminId + "</td><td>" + val.roleId + "</td><td>"+val.username+"</td><td>"+val.rolename+"</td><td><a onclick='deleteAdminRoleSubmit("+val.adminId+","+val.roleId+")' href='#'>删除</a></td></tr>";
-                 $('table#tblUser tbody').append(strHTML);
-			});  
+		      showErrorMsg(data["msg"]);
 		   },
 		   statusCode: {
                    
@@ -39,17 +42,13 @@
 		               withCredentials: true
 		            },
 		   success: function(data) {
-			   if (data["code"] == 100001) {
-				   $(window).attr('location','./login.html');
-				   return;
-			   }
-			      if (data["code"] == 100002) {
-			    	  alert(data["msg"]);
-					   return;
+			      if (data["code"] == 000000) {
+						jQuery.each(data["data"], function(i, val) {
+							selector_username.append('<option value="'+val.id+'">'+val.username+'</option>');  
+						});  
+						return;
 			      }
-				jQuery.each(data["data"], function(i, val) {
-					selector_username.append('<option value="'+val.id+'">'+val.username+'</option>');  
-				});  
+			      showErrorMsg(data["msg"]);
 		   },
 		   statusCode: {
                   
@@ -89,22 +88,18 @@
 		               withCredentials: true
 		            },
 		   success: function(data) {
-			   if (data["code"] == 100001) {
-				   $(window).attr('location','./login.html');
-				   return;
-			   }
-			      if (data["code"] == 100002) {
-			    	  alert(data["msg"]);
-					   return;
+			      if (data["code"] == 000000) {
+						jQuery.each(data["data"], function(i, val) {
+							if (admin_id == val.id) {
+								selector_username.append('<option value="'+val.id+'" selected=true>'+val.username+'</option>');
+							} else {
+								selector_username.append('<option value="'+val.id+'">'+val.username+'</option>');
+							}
+							  
+						}); 
+						return;
 			      }
-				jQuery.each(data["data"], function(i, val) {
-					if (admin_id == val.id) {
-						selector_username.append('<option value="'+val.id+'" selected=true>'+val.username+'</option>');
-					} else {
-						selector_username.append('<option value="'+val.id+'">'+val.username+'</option>');
-					}
-					  
-				});  
+			      showErrorMsg(data["msg"]);
 		   },
 		   statusCode: {
                  
@@ -158,19 +153,11 @@
                    contentType:"application/json",     
                    data: JSON.stringify(data), 
 		   success: function(data) {
-			   if (data["code"] == 100001) {
-				   $(window).attr('location','./login.html');
+			   if (data["code"] == 000000) {
+				   $(window).attr('location','./adminrole.html');
 				   return;
 			   }
-			      if (data["code"] == 100002) {
-			    	  alert(data["msg"]);
-					   return;
-			      }
-			   if (data["code"] == 100004) {
-				   alert(data["msg"]);
-				   return;
-			   }
-			$(window).attr('location','./adminrole.html');
+			   showErrorMsg(data["msg"]);
 		   },
 		   statusCode: {
                    
@@ -191,15 +178,11 @@
 		   url: 'http://localhost:8080/admin/adminrole/'+adminId + "/"+roleId,
 
 		   success: function(data) {
-			   if (data["code"] == 100001) {
-				   $(window).attr('location','./login.html');
-				   return;
-			   }
-			      if (data["code"] == 100002) {
-			    	  alert(data["msg"]);
-					   return;
+			      if (data["code"] == 000000) {
+			    	  $(window).attr('location','./adminrole.html');
+			    	  return;
 			      }
-			$(window).attr('location','./adminrole.html');
+			      showErrorMsg(data["msg"]);
 		   },
 		   statusCode: {
                    
@@ -222,16 +205,12 @@
                withCredentials: true
             },
 		   success: function(data) {
-			   if (data["code"] == 100001) {
-				   $(window).attr('location','./login.html');
-				   return;
-			   }
-			      if (data["code"] == 100002) {
-			    	  alert(data["msg"]);
-					   return;
+			      if (data["code"] == 000000) {
+		              $('#item_id').val(data["data"].id);
+	                  $('#item_rolename').val(data["data"].rolename);
+			    	  return;
 			      }
-                        $('#item_id').val(data["data"].id);
-                        $('#item_rolename').val(data["data"].rolename);
+			      showErrorMsg(data["msg"]);
 		   },
 		   statusCode: {
                    
@@ -261,19 +240,11 @@
 	            contentType:"application/json",     
 	            data: JSON.stringify(data), 
 		   success: function(result) {
-			   if (data["code"] == 100001) {
-				   $(window).attr('location','./login.html');
+			   if (data["code"] == 000000) {
+				   $(window).attr('location','./adminrole.html');
 				   return;
 			   }
-			      if (data["code"] == 100002) {
-			    	  alert(data["msg"]);
-					   return;
-			      }
-			   if (data["code"] == 100004) {
-				   alert(data["msg"]);
-				   return;
-			   }
-			$(window).attr('location','./adminrole.html');
+			   showErrorMsg(data["msg"]);
 		   },
 		   statusCode: {
 	            

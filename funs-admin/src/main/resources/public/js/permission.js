@@ -1,4 +1,11 @@
-   var getPermissionDatas = function(){
+        var hideErrorMsg = function(){
+            $("#dvErrorMsg").hide();
+        };
+        var showErrorMsg = function(msg){
+        	$("#spnErrorMsg").html(msg);
+            $("#dvErrorMsg").show();
+        };   
+var getPermissionDatas = function(){
 		$.ajax({
                    type: "GET",
 		   url: 'http://localhost:8080/admin/permission',
@@ -6,18 +13,14 @@
                withCredentials: true
             },
 		   success: function(data) {
-			   if (data["code"] == 100001) {
-				   $(window).attr('location','./login.html');
-				   return;
-			   }
-			      if (data["code"] == 100002) {
-			    	  alert(data["msg"]);
-					   return;
+			      if (data["code"] == 000000) {
+						jQuery.each(data["data"], function(i, val) {
+						      var strHTML = "<tr><td>" + val.id + "</td><td>" + val.name + "</td><td>"+val.code+"</td><td>"+val.createDate+"</td><td>"+val.updateDate+"</td><td><a onclick='updatePermission("+val.id+")' href='#'>修改</a>　|　<a onclick='deletePermissionSubmit("+val.id+")' href='#'>删除</a></td></tr>";
+			                        $('table#tblUser tbody').append(strHTML);
+						});  
+						return;
 			      }
-			jQuery.each(data["data"], function(i, val) {
-			      var strHTML = "<tr><td>" + val.id + "</td><td>" + val.name + "</td><td>"+val.code+"</td><td>"+val.createDate+"</td><td>"+val.updateDate+"</td><td><a onclick='updatePermission("+val.id+")' href='#'>修改</a>　|　<a onclick='deletePermissionSubmit("+val.id+")' href='#'>删除</a></td></tr>";
-                        $('table#tblUser tbody').append(strHTML);
-			});  
+			      showErrorMsg(data["msg"]);
 		   },
 		   statusCode: {
                    
@@ -49,15 +52,11 @@
                    contentType:"application/json",     
                    data: JSON.stringify(data), 
 		   success: function(data) {
-			   if (data["code"] == 100001) {
-				   $(window).attr('location','./login.html');
-				   return;
-			   }
-			      if (data["code"] == 100002) {
-			    	  alert(data["msg"]);
-					   return;
+			      if (data["code"] == 000000) {
+			    	  $(window).attr('location','./permission.html');
+			    	  return;
 			      }
-			$(window).attr('location','./permission.html');
+			      showErrorMsg(data["msg"]);
 		   },
 		   statusCode: {
                    
@@ -77,15 +76,11 @@
                withCredentials: true
             },
 		   success: function(data) {
-			   if (data["code"] == 100001) {
-				   $(window).attr('location','./login.html');
-				   return;
-			   }
-			      if (data["code"] == 100002) {
-			    	  alert(data["msg"]);
-					   return;
+			      if (data["code"] == 000000) {
+			    	  $(window).attr('location','./permission.html');
+			    	  return;
 			      }
-			$(window).attr('location','./permission.html');
+			      showErrorMsg(data["msg"]);
 		   },
 		   statusCode: {
                    
@@ -108,17 +103,13 @@
                withCredentials: true
             },
 		   success: function(data) {
-			   if (data["code"] == 100001) {
-				   $(window).attr('location','./login.html');
-				   return;
-			   }
-			      if (data["code"] == 100002) {
-			    	  alert(data["msg"]);
-					   return;
+			      if (data["code"] == 000000) {
+                      $('#item_id').val(data["data"].id);
+                      $('#item_name').val(data["data"].name);
+                      $('#item_code').val(data["data"].code);
+                      return;
 			      }
-                        $('#item_id').val(data["data"].id);
-                        $('#item_name').val(data["data"].name);
-                        $('#item_code').val(data["data"].code);
+			      showErrorMsg(data["msg"]);
 		   },
 		   statusCode: {
                    
@@ -149,15 +140,11 @@
 	            contentType:"application/json",     
 	            data: JSON.stringify(data), 
 		   success: function(data) {
-			   if (data["code"] == 100001) {
-				   $(window).attr('location','./login.html');
-				   return;
-			   }
-			      if (data["code"] == 100002) {
-			    	  alert(data["msg"]);
-					   return;
+			      if (data["code"] == 000000) {
+			    	  $(window).attr('location','./permission.html');
+			    	  return;
 			      }
-			$(window).attr('location','./permission.html');
+			      showErrorMsg(data["msg"]);
 		   },
 		   statusCode: {
 	            

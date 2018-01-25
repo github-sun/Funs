@@ -38,7 +38,9 @@
     <body>
 
         <div class="container-fluid">
-
+                  <div id="dvErrorMsg" class="alert alert-danger">
+                        <strong><span id="spnErrorMsg"></span></strong>
+                    </div>
             <div class="row content">
                 
 
@@ -70,6 +72,7 @@
         <script src="../js/rolepermission.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
+            	hideErrorMsg();
             	getRolePermissionAdminDatas();
                 $("#addRolePermissionSubmit").bind("click", function(){
                 	addRolePermissionSubmit();

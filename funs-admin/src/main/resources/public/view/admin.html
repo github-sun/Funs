@@ -39,7 +39,9 @@
     <body>
 
         <div class="container-fluid">
-
+                  <div id="dvErrorMsg" class="alert alert-danger">
+                        <strong><span id="spnErrorMsg"></span></strong>
+                    </div>
             <div class="row content">
                 
 
@@ -78,6 +80,7 @@
         <script src="../js/admin.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
+            	hideErrorMsg();
             	getAdminDatas();
                 $("#addAdmin").bind("click", function(){
                     $(window).attr('location','./admin_add.html');

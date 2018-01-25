@@ -39,7 +39,9 @@
     <body>
 
         <div class="container-fluid">
-
+                  <div id="dvErrorMsg" class="alert alert-danger">
+                        <strong><span id="spnErrorMsg"></span></strong>
+                    </div>
             <div class="row content">
                 
 
@@ -75,6 +77,7 @@
         <script src="../js/adminrole.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
+            	hideErrorMsg();
             	getAdminRoleDatas();
                 $("#addAdminRole").bind("click", function(){
                     $(window).attr('location','./adminrole_add.html');

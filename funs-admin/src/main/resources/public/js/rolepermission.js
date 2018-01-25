@@ -1,3 +1,10 @@
+        var hideErrorMsg = function(){
+            $("#dvErrorMsg").hide();
+        };
+        var showErrorMsg = function(msg){
+        	$("#spnErrorMsg").html(msg);
+            $("#dvErrorMsg").show();
+        };
 var getRolePermissionDatas = function() {
 	$.ajax({
 		type : "GET",
@@ -6,24 +13,21 @@ var getRolePermissionDatas = function() {
 			withCredentials : true
 		},
 		success : function(data) {
-			if (data["code"] == 100001) {
-				$(window).attr('location', './login.html');
-				return;
-			}
-			if (data["code"] == 100002) {
-				alert(data["msg"]);
-				return;
-			}
-			jQuery.each(data["data"], function(i, val) {
-				var strHTML = "<tr><td>" + val.roleId + "</td><td>"
-						+ val.permissionId + "</td><td>" + val.rolename
-						+ "</td><td>" + val.permissionname + "</td><td>"
-						+ val.permissioncode
-						+ "</td><td><a onclick='deleteRolePermissionSubmit("
-						+ val.roleId + "," + val.permissionId
-						+ ")' href='#'>删除</a></td></tr>";
-				$('table#tblUser tbody').append(strHTML);
+			
+			if (data["code"] == 000000) {
+				jQuery.each(data["data"], function(i, val) {
+					var strHTML = "<tr><td>" + val.roleId + "</td><td>"
+							+ val.permissionId + "</td><td>" + val.rolename
+							+ "</td><td>" + val.permissionname + "</td><td>"
+							+ val.permissioncode
+							+ "</td><td><a onclick='deleteRolePermissionSubmit("
+							+ val.roleId + "," + val.permissionId
+							+ ")' href='#'>删除</a></td></tr>";
+					$('table#tblUser tbody').append(strHTML);
 			});
+				return;
+			}
+				showErrorMsg(data["msg"]);
 		},
 		statusCode : {
 
@@ -44,18 +48,14 @@ var getRolePermissionAdminDatas = function() {
 			withCredentials : true
 		},
 		success : function(data) {
-			if (data["code"] == 100001) {
-				$(window).attr('location', './login.html');
+			if (data["code"] == 000000) {
+				jQuery.each(data["data"], function(i, val) {
+					selector_username.append('<option value="' + val.id + '">'
+							+ val.rolename + '</option>');
+				});
 				return;
 			}
-			if (data["code"] == 100002) {
-				alert(data["msg"]);
-				return;
-			}
-			jQuery.each(data["data"], function(i, val) {
-				selector_username.append('<option value="' + val.id + '">'
-						+ val.rolename + '</option>');
-			});
+			showErrorMsg(data["msg"]);
 		},
 		statusCode : {
 
@@ -96,24 +96,20 @@ var getAdminRoleAdminDatasByAdminIdAndRoleId = function(admin_id, role_id) {
 			withCredentials : true
 		},
 		success : function(data) {
-			if (data["code"] == 100001) {
-				$(window).attr('location', './login.html');
-				return;
-			}
-			if (data["code"] == 100002) {
-				alert(data["msg"]);
-				return;
-			}
-			jQuery.each(data["data"], function(i, val) {
-				if (admin_id == val.id) {
-					selector_username.append('<option value="' + val.id
-							+ '" selected=true>' + val.username + '</option>');
-				} else {
-					selector_username.append('<option value="' + val.id + '">'
-							+ val.username + '</option>');
-				}
+			if (data["code"] == 000000) {
+				jQuery.each(data["data"], function(i, val) {
+					if (admin_id == val.id) {
+						selector_username.append('<option value="' + val.id
+								+ '" selected=true>' + val.username + '</option>');
+					} else {
+						selector_username.append('<option value="' + val.id + '">'
+								+ val.username + '</option>');
+					}
 
-			});
+				});
+				return;
+			}
+			showErrorMsg(data["msg"]);
 		},
 		statusCode : {
 
@@ -172,19 +168,11 @@ var addRolePermissionSubmit = function() {
 		contentType : "application/json",
 		data : JSON.stringify(data),
 		success : function(result) {
-			if (data["code"] == 100001) {
-				$(window).attr('location', './login.html');
+			if (data["code"] == 000000) {
+				$(window).attr('location', './rolepermission.html');
 				return;
 			}
-			if (data["code"] == 100002) {
-				alert(data["msg"]);
-				return;
-			}
-			if (data["code"] == 100004) {
-				alert(data["msg"]);
-				return;
-			}
-			$(window).attr('location', './rolepermission.html');
+			showErrorMsg(data["msg"]);
 		},
 		statusCode : {
 
@@ -206,15 +194,11 @@ var deleteRolePermissionSubmit = function(roleId, permissionId) {
 				+ permissionId,
 
 		success : function(data) {
-			if (data["code"] == 100001) {
-				$(window).attr('location', './login.html');
+			if (data["code"] == 000000) {
+				$(window).attr('location', './rolepermission.html');
 				return;
 			}
-			if (data["code"] == 100002) {
-				alert(data["msg"]);
-				return;
-			}
-			$(window).attr('location', './rolepermission.html');
+			showErrorMsg(data["msg"]);
 		},
 		statusCode : {
 
