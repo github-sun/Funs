@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.sun.admin.service.AdminRoleService;
-import org.sun.dao.AdminRoleDAO;
+import org.sun.dao.admin.AdminRoleDAO;
 import org.sun.model.admin.AdminRole;
 import org.sun.model.admin.bo.AdminRoleBO;
 

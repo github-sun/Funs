@@ -6,7 +6,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.sun.admin.service.RolePermissionService;
-import org.sun.dao.RolePermissionDAO;
+import org.sun.dao.admin.RolePermissionDAO;
 import org.sun.model.admin.RolePermission;
 import org.sun.model.admin.bo.RolePermissionBO;
 

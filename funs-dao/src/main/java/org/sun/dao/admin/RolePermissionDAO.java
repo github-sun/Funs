@@ -1,4 +1,4 @@
-package org.sun.dao;
+package org.sun.dao.admin;
 
 import java.util.List;
 import java.util.Set;

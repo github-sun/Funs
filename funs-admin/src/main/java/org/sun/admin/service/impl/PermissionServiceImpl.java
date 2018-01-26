@@ -7,7 +7,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.sun.admin.service.PermissionService;
-import org.sun.dao.PermissionDAO;
+import org.sun.dao.admin.PermissionDAO;
 import org.sun.model.admin.Permission;
 
 /**
