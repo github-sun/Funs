@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.sun.admin.contacts.Contacts;
 import org.sun.admin.shiro.AuthenticationToken;
-import org.sun.model.Admin;
+import org.sun.model.admin.Admin;
 
 /**
 * @author sun 

@@ -2,8 +2,8 @@ package org.sun.admin.service;
 
 import java.util.List;
 
-import org.sun.model.AdminRole;
-import org.sun.model.bo.AdminRoleBO;
+import org.sun.model.admin.AdminRole;
+import org.sun.model.admin.bo.AdminRoleBO;
 
 /**
  * @author sun

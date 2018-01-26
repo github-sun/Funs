@@ -22,7 +22,7 @@ import org.sun.admin.contacts.Contacts;
 import org.sun.admin.service.AdminService;
 import org.sun.admin.service.PermissionService;
 import org.sun.admin.service.RolePermissionService;
-import org.sun.model.Admin;
+import org.sun.model.admin.Admin;
 
 /**
  * @author sun

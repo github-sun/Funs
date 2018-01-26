@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.sun.admin.service.RolePermissionService;
 import org.sun.admin.util.AuthorizationUtils;
 import org.sun.admin.util.ResponseResultUtils;
-import org.sun.model.RolePermission;
-import org.sun.model.bo.RolePermissionBO;
-import org.sun.model.vo.ResponseResult;
+import org.sun.model.admin.RolePermission;
+import org.sun.model.admin.bo.RolePermissionBO;
+import org.sun.model.admin.vo.ResponseResult;
 
 /**
  * @author sun

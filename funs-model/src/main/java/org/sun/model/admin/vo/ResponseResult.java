@@ -1,4 +1,4 @@
-package org.sun.model.vo;
+package org.sun.model.admin.vo;
 /**
 * @author sun 
 * @date Jan 23, 2018 4:47:55 PM

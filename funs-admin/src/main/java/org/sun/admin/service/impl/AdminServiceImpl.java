@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.sun.admin.service.AdminService;
 import org.sun.admin.util.Utils;
 import org.sun.dao.AdminDAO;
-import org.sun.model.Admin;
+import org.sun.model.admin.Admin;
 
 /**
 * @author sun 

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.sun.admin.service.RoleService;
 import org.sun.dao.RoleDAO;
-import org.sun.model.Role;
+import org.sun.model.admin.Role;
 
 /**
 * @author sun 

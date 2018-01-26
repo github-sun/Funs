@@ -9,8 +9,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.transaction.annotation.Transactional;
-import org.sun.model.AdminRole;
-import org.sun.model.bo.AdminRoleBO;
+import org.sun.model.admin.AdminRole;
+import org.sun.model.admin.bo.AdminRoleBO;
 
 /**
 * @author sun 

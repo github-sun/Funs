@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.sun.admin.service.AdminRoleService;
 import org.sun.dao.AdminRoleDAO;
-import org.sun.model.AdminRole;
-import org.sun.model.bo.AdminRoleBO;
+import org.sun.model.admin.AdminRole;
+import org.sun.model.admin.bo.AdminRoleBO;
 
 /**
 * @author sun 

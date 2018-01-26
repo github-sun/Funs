@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-import org.sun.model.Admin;
-import org.sun.model.AdminRole;
-import org.sun.model.Role;
+import org.sun.model.admin.Admin;
+import org.sun.model.admin.AdminRole;
+import org.sun.model.admin.Role;
 
 /**
 * @author sun 

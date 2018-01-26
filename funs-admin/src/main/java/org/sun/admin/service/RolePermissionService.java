@@ -3,8 +3,8 @@ package org.sun.admin.service;
 import java.util.List;
 import java.util.Set;
 
-import org.sun.model.RolePermission;
-import org.sun.model.bo.RolePermissionBO;
+import org.sun.model.admin.RolePermission;
+import org.sun.model.admin.bo.RolePermissionBO;
 
 /**
  * @author sun

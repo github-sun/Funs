@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.transaction.annotation.Transactional;
-import org.sun.model.Admin;
+import org.sun.model.admin.Admin;
 
 /**
 * @author sun 

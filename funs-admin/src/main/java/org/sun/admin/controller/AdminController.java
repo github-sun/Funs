@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.sun.admin.service.AdminService;
 import org.sun.admin.util.ResponseResultUtils;
-import org.sun.model.Admin;
-import org.sun.model.vo.ResponseResult;
+import org.sun.model.admin.Admin;
+import org.sun.model.admin.vo.ResponseResult;
 
 /**
 * @author sun 

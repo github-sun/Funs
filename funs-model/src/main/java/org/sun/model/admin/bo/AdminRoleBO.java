@@ -1,4 +1,4 @@
-package org.sun.model.bo;
+package org.sun.model.admin.bo;
 
 import java.io.Serializable;
 

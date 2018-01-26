@@ -1,7 +1,7 @@
 package org.sun.admin.util;
 
 import org.sun.admin.enums.ResponseResultCode;
-import org.sun.model.vo.ResponseResult;
+import org.sun.model.admin.vo.ResponseResult;
 
 /**
  * @author sun

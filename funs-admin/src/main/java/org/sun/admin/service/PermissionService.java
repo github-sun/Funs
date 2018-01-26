@@ -3,7 +3,7 @@ package org.sun.admin.service;
 import java.util.List;
 import java.util.Set;
 
-import org.sun.model.Permission;
+import org.sun.model.admin.Permission;
 
 /**
  * @author sun

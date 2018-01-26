@@ -9,7 +9,7 @@ import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.springframework.http.MediaType;
 import org.sun.admin.enums.ResponseResultCode;
 import org.sun.admin.util.ResponseResultUtils;
-import org.sun.model.vo.ResponseResult;
+import org.sun.model.admin.vo.ResponseResult;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

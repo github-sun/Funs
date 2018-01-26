@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.sun.admin.service.RoleService;
 import org.sun.admin.util.ResponseResultUtils;
-import org.sun.model.Role;
-import org.sun.model.vo.ResponseResult;
+import org.sun.model.admin.Role;
+import org.sun.model.admin.vo.ResponseResult;
 
 /**
 * @author sun 

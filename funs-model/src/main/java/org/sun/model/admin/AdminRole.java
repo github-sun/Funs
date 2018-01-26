@@ -1,4 +1,4 @@
-package org.sun.model;
+package org.sun.model.admin;
 
 import java.io.Serializable;
 
