@@ -1,4 +1,12 @@
-   var loginSubmit = function(){
+        var hideErrorMsg = function(){
+            $("#dvErrorMsg").hide();
+        };
+        var showErrorMsg = function(msg){
+        	$("#spnErrorMsg").html(msg);
+            $("#dvErrorMsg").show();
+        };
+        
+var loginSubmit = function(){
 	   
             var name = $('#item_username').val();
             if (name == null || name == '') {
@@ -18,12 +26,12 @@
                        withCredentials: true
                     },
                    data: JSON.stringify(data), 
-		   success: function(result) {
-			   if (result == 1) {
-				   alert("用户名或密码错误!");
-			   } else {
-				   $(window).attr('location','./login_success.html');
-			   }
+		   success: function(data) {
+			      if (data["code"] == 000000) {
+			    	  $(window).attr('location','./login_success.html');
+						return;
+			      }
+			      showErrorMsg(data["msg"]);
 		   },
 		   statusCode: {
                    

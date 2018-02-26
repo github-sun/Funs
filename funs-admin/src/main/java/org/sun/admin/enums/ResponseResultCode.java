@@ -12,7 +12,8 @@ public enum ResponseResultCode {
     PERMISSION_NOT(100002, "无权限"),
 	FAILED(100003, "请求失败"),
 	ADMIN_ROLE_EXIST(100004, "无对照关系已存在!"),
-	UNKNOWN_ERROR(100005, "未知错误!");
+	UNKNOWN_ERROR(100005, "未知错误!"),
+	LOGIN_ERROR(100006, "用户名密码有误");
 	private int code;
     private String msg;
 
