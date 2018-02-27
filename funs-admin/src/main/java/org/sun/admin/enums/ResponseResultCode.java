@@ -13,7 +13,7 @@ public enum ResponseResultCode {
 	FAILED(100003, "请求失败"),
 	ADMIN_ROLE_EXIST(100004, "无对照关系已存在!"),
 	UNKNOWN_ERROR(100005, "未知错误!"),
-	LOGIN_ERROR(100006, "用户名密码有误");
+	LOGIN_ERROR(100006, "用户名或密码有误");
 	private int code;
     private String msg;
 

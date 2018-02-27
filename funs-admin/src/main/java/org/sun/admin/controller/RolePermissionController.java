@@ -21,6 +21,10 @@ import org.sun.model.admin.RolePermission;
 import org.sun.model.admin.bo.RolePermissionBO;
 import org.sun.model.vo.ResponseResult;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+
 /**
  * @author sun
  * @date Jan 15, 2018 2:23:58 PM
@@ -36,6 +40,8 @@ public class RolePermissionController {
 	@Autowired
 	private RolePermissionService rolePermissionService;
 
+	@ApiOperation(value="根据id获取角色权限对照列表", notes="")
+	@ApiImplicitParams({@ApiImplicitParam(name = "roleId", value = "角色ID", required = true, dataType = "Integer"), @ApiImplicitParam(name = "permissionId", value = "权限ID", required = true, dataType = "Integer")})
 	@RequiresPermissions("rolepermission:list.id")
 	@GetMapping("/rolepermission/{roleId}/{permissionId}")
 	public RolePermission getRolePermissionById(@PathVariable("roleId") Integer roleId,
@@ -44,6 +50,7 @@ public class RolePermissionController {
 		return rolePermissionService.getRolePermissionById(roleId, permissionId);
 	}
 
+	@ApiOperation(value="获取所有角色权限对照列表", notes="")
 	@RequiresPermissions("rolepermission:list.all")
 	@GetMapping("/rolepermission")
 	public ResponseResult getRolePermissionDatas() {
@@ -52,6 +59,8 @@ public class RolePermissionController {
 		return ResponseResultUtils.success(list);
 	}
 
+	@ApiOperation(value="添加角色权限对照", notes="")
+	@ApiImplicitParam(name = "model", value = "角色权限对照信息", required = true, dataType = "RolePermission")
 	@RequiresPermissions("rolepermission:add")
 	@PostMapping("/rolepermission")
 	public ResponseResult addRolePermission(@RequestBody RolePermission model) {
@@ -68,6 +77,8 @@ public class RolePermissionController {
 		return result;
 	}
 
+	@ApiOperation(value="根据用户id删除该角色权限对照", notes="")
+	@ApiImplicitParams({@ApiImplicitParam(name = "roleId", value = "角色ID", required = true, dataType = "Integer"), @ApiImplicitParam(name = "permissionId", value = "权限ID", required = true, dataType = "Integer")})
 	@RequiresPermissions("rolepermission:remove.id")
 	@DeleteMapping("/rolepermission/{roleId}/{permissionId}")
 	public ResponseResult removeRolePermission(@PathVariable("roleId") Integer roleId,
@@ -80,6 +91,8 @@ public class RolePermissionController {
 		return result;
 	}
 
+	@ApiOperation(value="修改角色权限对照", notes="")
+	@ApiImplicitParam(name = "model", value = "角色权限对照信息", required = true, dataType = "RolePermission")
 	@RequiresPermissions("rolepermission:update")
 	@PutMapping("/rolepermission")
 	public ResponseResult updateRolePermission(@RequestBody RolePermission model) {

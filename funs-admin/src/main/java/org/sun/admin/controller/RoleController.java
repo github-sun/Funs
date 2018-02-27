@@ -20,6 +20,9 @@ import org.sun.admin.util.ResponseResultUtils;
 import org.sun.model.admin.Role;
 import org.sun.model.vo.ResponseResult;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+
 /**
 * @author sun 
 * @date Jan 15, 2018 2:23:58 PM
@@ -35,6 +38,8 @@ public class RoleController {
 	@Autowired
 	private RoleService roleService;
 	
+	@ApiOperation(value="根据id获取角色列表", notes="")
+	@ApiImplicitParam(name = "id", value = "角色ID", required = true, dataType = "Integer")
 	@RequiresPermissions("role:list.id")
 	@GetMapping("/role/{id}")
 	public ResponseResult getRoleById(@PathVariable("id") Integer id) {
@@ -43,6 +48,7 @@ public class RoleController {
 		return ResponseResultUtils.success(model);
 	}
 	
+	@ApiOperation(value="获取所有角色列表", notes="")
 	@RequiresPermissions("role:list.all")
 	@GetMapping("/role")
 	public ResponseResult getRoleDatas() {
@@ -51,6 +57,8 @@ public class RoleController {
 		return ResponseResultUtils.success(list);
 	}
 	
+	@ApiOperation(value="添加角色", notes="")
+	@ApiImplicitParam(name = "model", value = "角色信息", required = true, dataType = "Role")
 	@RequiresPermissions("role:add")
 	@PostMapping("/role")
 	public ResponseResult addRole(@RequestBody Role model) {
@@ -62,6 +70,8 @@ public class RoleController {
 		return model.getId() > 0 ? ResponseResultUtils.success() : ResponseResultUtils.failed();
 	}
 	
+	@ApiOperation(value="根据用户id删除该角色", notes="")
+	@ApiImplicitParam(name = "id", value = "角色ID", required = true, dataType = "Integer")
 	@RequiresPermissions("role:remove.id")
 	@DeleteMapping("/role/{id}")
 	public ResponseResult removeRole(@PathVariable("id") Integer id) {
@@ -69,6 +79,8 @@ public class RoleController {
 		return roleService.removeRoleById(id) > 0 ? ResponseResultUtils.success() : ResponseResultUtils.failed();
 	}
 	
+	@ApiOperation(value="修改角色", notes="")
+	@ApiImplicitParam(name = "model", value = "角色信息", required = true, dataType = "Role")
 	@RequiresPermissions("role:update")
 	@PutMapping("/role")
 	public ResponseResult updateRole(@RequestBody Role model) {

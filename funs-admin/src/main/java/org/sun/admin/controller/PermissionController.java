@@ -20,6 +20,9 @@ import org.sun.admin.util.ResponseResultUtils;
 import org.sun.model.admin.Permission;
 import org.sun.model.vo.ResponseResult;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+
 /**
 * @author sun 
 * @date Jan 15, 2018 2:23:58 PM
@@ -35,6 +38,8 @@ public class PermissionController {
 	@Autowired
 	private PermissionService permissionService;
 	
+	@ApiOperation(value="根据id获取权限列表", notes="")
+	@ApiImplicitParam(name = "id", value = "权限ID", required = true, dataType = "Integer")
 	@RequiresPermissions("permission:list.id")
 	@GetMapping("/permission/{id}")
 	public ResponseResult getPermissionById(@PathVariable("id") Integer id) {
@@ -43,6 +48,7 @@ public class PermissionController {
 		return ResponseResultUtils.success(model);
 	}
 	
+	@ApiOperation(value="获取所有权限列表", notes="")
 	@RequiresPermissions("permission:list.all")
 	@GetMapping("/permission")
 	public ResponseResult getPermissionDatas() {
@@ -51,6 +57,8 @@ public class PermissionController {
 		return ResponseResultUtils.success(list);
 	}
 	
+	@ApiOperation(value="添加权限", notes="")
+	@ApiImplicitParam(name = "model", value = "权限信息", required = true, dataType = "Permission")
 	@RequiresPermissions("permission:add")
 	@PostMapping("/permission")
 	public ResponseResult addPermission(@RequestBody Permission model) {
@@ -62,6 +70,8 @@ public class PermissionController {
 		return model.getId() > 0 ? ResponseResultUtils.success() : ResponseResultUtils.failed();
 	}
 	
+	@ApiOperation(value="根据用户id删除该权限", notes="")
+	@ApiImplicitParam(name = "id", value = "权限ID", required = true, dataType = "Integer")
 	@RequiresPermissions("permission:remove.id")
 	@DeleteMapping("/permission/{id}")
 	public ResponseResult removePermission(@PathVariable("id") Integer id) {
@@ -69,6 +79,8 @@ public class PermissionController {
 		return permissionService.removePermissionById(id) > 0 ? ResponseResultUtils.success() : ResponseResultUtils.failed();
 	}
 	
+	@ApiOperation(value="修改权限", notes="")
+	@ApiImplicitParam(name = "model", value = "权限信息", required = true, dataType = "Permission")
 	@RequiresPermissions("permission:update")
 	@PutMapping("/permission")
 	public ResponseResult updatePermission(@RequestBody Permission model) {

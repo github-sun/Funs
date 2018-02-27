@@ -8,6 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.PropertySource;
 
+import com.didispace.swagger.EnableSwagger2Doc;
+
+@EnableSwagger2Doc
 @SpringBootApplication(scanBasePackages={"org.sun.admin"})
 @MapperScan(basePackages = "org.sun.dao")
 @PropertySource(ignoreResourceNotFound=true, value={"classpath:application-dao.properties","classpath:application-admin.properties"})

@@ -20,6 +20,10 @@ import org.sun.model.admin.AdminRole;
 import org.sun.model.admin.bo.AdminRoleBO;
 import org.sun.model.vo.ResponseResult;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+
 /**
 * @author sun 
 * @date Jan 15, 2018 2:23:58 PM
@@ -35,6 +39,8 @@ public class AdminRoleController {
 	@Autowired
 	private AdminRoleService adminRoleService;
 	
+	@ApiOperation(value="根据id获取用户角色对照列表", notes="")
+	@ApiImplicitParams({@ApiImplicitParam(name = "adminId", value = "用户ID", required = true, dataType = "Integer"), @ApiImplicitParam(name = "roleId", value = "角色ID", required = true, dataType = "Integer")})
 	@RequiresPermissions("adminrole:list.id")
 	@GetMapping("/adminrole/{adminId}/{roleId}")
 	public AdminRole getAdminRoleById(@PathVariable("adminId") Integer adminId,@PathVariable("roleId") Integer roleId) {
@@ -42,6 +48,7 @@ public class AdminRoleController {
 		return adminRoleService.getAdminRoleById(adminId, roleId);
 	}
 	
+	@ApiOperation(value="获取所有用户角色对照列表", notes="")
 	@RequiresPermissions("adminrole:list.all")
 	@GetMapping("/adminrole")
 	public ResponseResult getAdminRoleDatas() {
@@ -50,6 +57,8 @@ public class AdminRoleController {
 		return ResponseResultUtils.success(list);
 	}
 	
+	@ApiOperation(value="添加用户角色", notes="")
+	@ApiImplicitParam(name = "model", value = "用户角色对照信息", required = true, dataType = "AdminRole")
 	@RequiresPermissions("adminrole:add")
 	@PostMapping("/adminrole")
 	public ResponseResult addAdminRole(@RequestBody AdminRole model) {
@@ -61,6 +70,8 @@ public class AdminRoleController {
 		return adminRoleService.addAdminRole(model) > 0 ? ResponseResultUtils.success() : ResponseResultUtils.failed();
 	}
 	
+	@ApiOperation(value="根据用户id删除该用户角色对照", notes="")
+	@ApiImplicitParams({@ApiImplicitParam(name = "admin_id", value = "用户ID", required = true, dataType = "Integer"), @ApiImplicitParam(name = "role_id", value = "角色ID", required = true, dataType = "Integer")})
 	@RequiresPermissions("adminrole:remove.id")
 	@DeleteMapping("/adminrole/{admin_id}/{role_id}")
 	public ResponseResult removeAdminRole(@PathVariable("admin_id") Integer adminId,@PathVariable("role_id") Integer roleId) {
@@ -68,6 +79,8 @@ public class AdminRoleController {
 		return adminRoleService.removeAdminRoleById(adminId, roleId) > 0 ? ResponseResultUtils.success() : ResponseResultUtils.failed();
 	}
 	
+	@ApiOperation(value="修改用户角色对照", notes="")
+	@ApiImplicitParam(name = "model", value = "用户角色对照信息", required = true, dataType = "AdminRole")
 	@RequiresPermissions("adminrole:update")
 	@PutMapping("/adminrole")
 	public ResponseResult updateAdminRole(@RequestBody AdminRole model) {
