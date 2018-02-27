@@ -14,18 +14,25 @@ import org.sun.admin.util.ResponseResultUtils;
 import org.sun.model.admin.Admin;
 import org.sun.model.vo.ResponseResult;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+
 /**
 * @author sun 
 * @date Jan 15, 2018 2:23:58 PM
 * 
 */
 
+@Api(value="",tags={"登录接口"})
 @RestController
 public class LoginController {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());  
 	
 
+	@ApiOperation(value="登录", notes="")
+	@ApiImplicitParam(name = "model", value = "用户信息", required = true, dataType = "Admin")
 	@PostMapping("/login")
 	public ResponseResult login(@RequestBody Admin model) {
 		logger.debug("===login "+model.toString());

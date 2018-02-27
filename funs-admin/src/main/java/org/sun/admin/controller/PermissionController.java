@@ -20,6 +20,7 @@ import org.sun.admin.util.ResponseResultUtils;
 import org.sun.model.admin.Permission;
 import org.sun.model.vo.ResponseResult;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 
@@ -29,6 +30,7 @@ import io.swagger.annotations.ApiOperation;
 * 
 */
 
+@Api(value="",tags={"权限操作接口"})
 @RestController
 @RequestMapping("/admin")
 public class PermissionController {

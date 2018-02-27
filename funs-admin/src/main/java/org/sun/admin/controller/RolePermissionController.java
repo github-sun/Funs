@@ -21,6 +21,7 @@ import org.sun.model.admin.RolePermission;
 import org.sun.model.admin.bo.RolePermissionBO;
 import org.sun.model.vo.ResponseResult;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -31,6 +32,7 @@ import io.swagger.annotations.ApiOperation;
  * 
  */
 
+@Api(value="",tags={"角色权限对照操作接口"})
 @RestController
 @RequestMapping("/admin")
 public class RolePermissionController {

@@ -20,6 +20,7 @@ import org.sun.model.admin.AdminRole;
 import org.sun.model.admin.bo.AdminRoleBO;
 import org.sun.model.vo.ResponseResult;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -30,6 +31,7 @@ import io.swagger.annotations.ApiOperation;
 * 
 */
 
+@Api(value="",tags={"用户角色对照操作接口"})
 @RestController
 @RequestMapping("/admin")
 public class AdminRoleController {
