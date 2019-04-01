@@ -1,5 +1,5 @@
 CREATE DATABASE funs;
-
+  
 DROP TABLE IF EXISTS `ADMIN`;
 CREATE TABLE `ADMIN` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
@@ -61,5 +61,32 @@ CREATE TABLE `ROLE_PERMISSION` (
 
 
 
-#Insert Data
+#Insert ADMIN Data
 INSERT INTO `ADMIN` VALUES (1,'admin', '2c16b79ac1a15289c1c7fc6e50e26d80', 0, '81c199cc717b0d11f593eb854acf6e2b', 1, '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+
+#Insert PERMISSION Data
+INSERT INTO `PERMISSION` VALUES (1,'获取用户列表', 'admin:list.all', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (2,'根据id获取用户列表', 'admin:list.id', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (3,'添加用户', 'admin:add', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (4,'修改用户', 'admin:update', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (5,'删除用户', 'admin:remove.id', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (6,'获取角色列表', 'role:list.all', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (7,'根据id获取角色列表', 'role:list.id', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (8,'添加角色', 'role:add', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (9,'修改角色', 'role:update', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (10,'删除角色', 'role:remove.id', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (11,'获取用户角色列表', 'adminrole:list.all', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (12,'根据id获取用户角色列表', 'adminrole:list.id', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (13,'添加用户角色', 'adminrole:add', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (14,'修改用户角色', 'adminrole:update', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (15,'删除用户角色', 'adminrole:remove.id', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (16,'获取权限列表', 'permission:list.all', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (17,'根据id获取权限列表', 'permission:list.id', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (18,'添加权限', 'permission:add', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (19,'修改权限', 'permission:update', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (20,'删除权限', 'permission:remove.id', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (21,'获取角色权限列表', 'rolepermission:list.all', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (22,'根据id角色权限列表', 'rolepermission:list.id', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (23,'添加角色权限', 'rolepermission:add', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (24,'修改角色权限', 'rolepermission:update', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
+INSERT INTO `PERMISSION` VALUES (25,'删除角色权限', 'rolepermission:remove.id', '2018-01-07 13:24:17', '2017-05-09 16:05:34');
